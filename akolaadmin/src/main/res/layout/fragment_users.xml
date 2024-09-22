@@ -1,0 +1,16 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?android:attr/actionBarSize"
+    tools:context="gauravdahale.gtech.akolaadmin.UsersFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/users_recycler"
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+
+</FrameLayout>

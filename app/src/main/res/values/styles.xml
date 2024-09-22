@@ -1,0 +1,126 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents">
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/synthcolor</item>
+<!--        <item name="neuFlatButtonAppearance">@style/elevatedFlat_blueButton</item>-->
+<!--        <item name="dividerAppearance">@style/neuWhiteDivider</item>-->
+        <item name="colorPrimary">@color/synthcolor</item>
+        <item name="colorSecondary">@color/copper_text_color_30</item>
+        <item name="colorPrimaryDark">@color/synthcolor</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="fontFamily">@font/poppins</item>
+        <item name="font">@font/poppins</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:navigationBarColor">@color/synthcolor</item>
+        <item name="android:statusBarColor">@color/synthcolor</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="drawerArrowStyle">@style/DrawerHamburgerStyle</item>
+
+
+    </style>
+
+    <style name="AppTheme.Auth" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/synthcolor</item>
+        <item name="fontFamily">@font/poppins</item>
+        <item name="font">@font/poppins</item>
+        <item name="android:navigationBarColor">@color/synthcolor</item>
+        <item name="colorOnPrimary">@color/amber_400</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="android:textColorSecondary">@color/copper_text_color</item>
+
+    </style>
+
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
+
+    </style>
+
+
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <style name="button" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:minWidth">80dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:minHeight">40dp</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <item name="colorControlNormal">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
+        <item name="colorControlNormal">@color/colorAccent</item>
+    </style>
+    <!--HAMBURGER ICON-->
+    <style name="DrawerHamburgerStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/copper_text_color</item>
+    </style>
+    <!--Back Arrow-->
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
+
+
+<!--    <style name="elevated_view_appearance">-->
+<!--        <item name="neuLightShadowColor">@color/amber_800</item>-->
+<!--        <item name="neuDarkShadowColor">@color/purple_700</item>-->
+<!--        <item name="softEdgeColor">@color/copper_text_color_30</item>-->
+<!--        <item name="neuCompatColor">@color/colorAccent</item>-->
+<!--    </style>-->
+<!--    <style name="elevatedFlat_blueButton">-->
+<!--        <item name="neuButtonStartColor">#FF426bb6</item>-->
+<!--        <item name="neuButtonEndColor">#FF26458c</item>-->
+<!--        <item name="neuButtonBorder1StartColor">#FF5679c4</item>-->
+<!--        <item name="neuButtonBorder1EndColor">#FF1b2d5b</item>-->
+<!--        <item name="neuButtonBorder2StartColor">#FF366BD1</item>-->
+<!--        <item name="neuButtonBorder2EndColor">#FF18263E</item>-->
+<!--        <item name="neuButtonPressedDarkShadowColor">#80000000</item>-->
+<!--    </style>-->
+
+<!--    <style name="neuWhiteDivider">-->
+<!--        <item name="neuDividerStartColor">#FF212426</item>-->
+<!--        <item name="neuDividerMiddleColor">#FF2e3234</item>-->
+<!--        <item name="neuDividerEndColor">#FF212426</item>-->
+<!--    </style>-->
+
+<!--    <style name="button_flat_appearance">-->
+<!--        <item name="neuButtonStartColor">@color/blue_600</item>-->
+<!--        <item name="neuButtonEndColor">@color/blue_900</item>-->
+<!--        <item name="neuButtonBorder1StartColor">@color/yellow_50</item>-->
+<!--        <item name="neuButtonBorder1EndColor">@color/yellow_400</item>-->
+<!--        <item name="neuButtonBorder2StartColor">@color/red_100</item>-->
+<!--        <item name="neuButtonBorder2EndColor">@color/red_600</item>-->
+<!--        <item name="neuButtonPressedDarkShadowColor">@color/amber_300</item>-->
+<!--    </style>-->
+<!--    <style name="button_platform_appearance">-->
+<!--        <item name="neuLightShadowColor">@color/colorAccentDark</item>-->
+<!--        <item name="neuDarkShadowColor">@color/colorAccentDark</item>-->
+<!--&lt;!&ndash;        <item name="neuFillStartColor">@color/green_100</item>&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="neuFillEndColor">@color/yellow_100</item>&ndash;&gt;-->
+<!--        <item name="neuFillPressedStartColor">@color/synthcolor</item>-->
+<!--        <item name="neuFillPressedEndColor">@color/synthcolor</item>-->
+<!--&lt;!&ndash;        <item name="neuBorderStartColor">@color/cyan_700</item>&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="neuBorderEndColor">@color/cyan_900</item>&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="neuBorderPressedStartColor">@color/blue_600</item>&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="neuBorderPressedEndColor">@color/blue_800</item>&ndash;&gt;-->
+<!--    </style>-->
+</resources>

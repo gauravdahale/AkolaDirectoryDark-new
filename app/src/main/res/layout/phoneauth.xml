@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/synthcolor"
+    android:clipChildren="false"
+    android:fillViewport="true"
+    tools:context=".activity.PhoneAuth">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@color/synthcolor"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pattern_top_right"/>
+            <ImageView
+                android:id="@+id/authimage"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/logo"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/formview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="16dp"
+            android:clipChildren="false"
+            android:orientation="vertical"
+            android:padding="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/relativeLayout">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/baloo"
+                android:text="Your data is safe with us"
+                android:textColor="@color/copper_text_color"
+                android:textSize="20sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/usernametxt"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:boxStrokeColor="@color/copper_text_color"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:helperTextTextColor="@color/copper_text_color_30"
+                app:hintTextColor="@color/copper_text_color">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/auth_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:hint="Your Name(तुमचे नाव)"
+                    android:textColor="@color/copper_text_color"
+                    android:textSize="14sp"
+                    app:hintTextColor="@color/copper_text_color" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/userocupation"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="@color/copper_text_color"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:helperTextTextColor="@color/copper_text_color_30"
+                app:hintTextColor="@color/copper_text_color">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/auth_occupation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Business Or Occupation(काम/धंदा)"
+                    android:textColor="@color/copper_text_color"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/usernumber"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789"
+                android:inputType="phone"
+                app:boxStrokeColor="@color/copper_text_color"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:helperTextTextColor="@color/copper_text_color_30"
+                app:hintTextColor="@color/copper_text_color">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/auth_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="0123456789"
+                    android:hint="Enter Contact Number(तुमचा नंबर)"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:textColor="@color/copper_text_color"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/usercity"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="@color/copper_text_color"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:helperTextTextColor="@color/copper_text_color_30"
+                app:hintTextColor="@color/copper_text_color">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/auth_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Your City(तुमचे गाव)"
+                    android:textColor="@color/copper_text_color"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/buttonContinue"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="end"
+                android:layout_margin="24dp"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:padding="20dp"
+                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                app:tint="@android:color/white" />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/pattern_bottom_left"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

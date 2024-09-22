@@ -1,0 +1,300 @@
+{
+  "project_info": {
+    "project_number": "383840144664",
+    "firebase_url": "https://akola-directory.firebaseio.com",
+    "project_id": "akola-directory",
+    "storage_bucket": "akola-directory.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383840144664:android:c7552428dcb4382f",
+        "android_client_info": {
+          "package_name": "gauravdahale.gtech.akolaadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383840144664-0gk3vu3fb1lgbcmp2ev9ofcnpbge8eip.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gauravdahale.gtech.akolaadmin",
+            "certificate_hash": "cd70bd2c619d7e22bdcf8055efd2a393ed39b289"
+          }
+        },
+        {
+          "client_id": "383840144664-c9ebgq4pq116i3aj6vujpak5hj3k6rca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwqWl8DDdId-1XBUCsJU74xyn2BCg0rsA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383840144664-c9ebgq4pq116i3aj6vujpak5hj3k6rca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383840144664:android:a90687ebc0f15fac",
+        "android_client_info": {
+          "package_name": "gauravdahale.gtech.akolacrm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383840144664-5c3ng1c7t9fu554m1hmuuqe61253q10v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gauravdahale.gtech.akolacrm",
+            "certificate_hash": "cd70bd2c619d7e22bdcf8055efd2a393ed39b289"
+          }
+        },
+        {
+          "client_id": "383840144664-c9ebgq4pq116i3aj6vujpak5hj3k6rca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwqWl8DDdId-1XBUCsJU74xyn2BCg0rsA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383840144664-c9ebgq4pq116i3aj6vujpak5hj3k6rca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383840144664:android:1acb79262a862b6d",
+        "android_client_info": {
+          "package_name": "gauravdahale.gtech.akoladirectory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383840144664-p09i0m3on4jonl2517p365odsrh1fptk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gauravdahale.gtech.akoladirectory",
+            "certificate_hash": "68e9d64b0ec2d6106bae8002a8c60b87e0483fb2"
+          }
+        },
+        {
+          "client_id": "383840144664-qq3ted92i39crha4ur4pahulof02t5dl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gauravdahale.gtech.akoladirectory",
+            "certificate_hash": "5f65ae8c23e9cb26290a20ec94e49120c5dbe676"
+          }
+        },
+        {
+          "client_id": "383840144664-ltaqif724ak2lipfihiv04750rqk1rgo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gauravdahale.gtech.akoladirectory",
+            "certificate_hash": "150a74bbe6d84dbc573cf489111924a263614abf"
+          }
+        },
+        {
+          "client_id": "383840144664-63qov2vfbbemh3e4idis4cbdlsvhnh8k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gauravdahale.gtech.akoladirectory",
+            "certificate_hash": "cd70bd2c619d7e22bdcf8055efd2a393ed39b289"
+          }
+        },
+        {
+          "client_id": "383840144664-c9ebgq4pq116i3aj6vujpak5hj3k6rca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwqWl8DDdId-1XBUCsJU74xyn2BCg0rsA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383840144664-c9ebgq4pq116i3aj6vujpak5hj3k6rca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      },
+      "admob_app_id": "ca-app-pub-4353073709762339~9362988006"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383840144664:android:7b6d68141107f4db",
+        "android_client_info": {
+          "package_name": "gauravdahale.gtech.akolarequest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383840144664-2chg6tcfkltrba70rkkrup7d4mdn55n9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gauravdahale.gtech.akolarequest",
+            "certificate_hash": "5f65ae8c23e9cb26290a20ec94e49120c5dbe676"
+          }
+        },
+        {
+          "client_id": "383840144664-c9ebgq4pq116i3aj6vujpak5hj3k6rca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwqWl8DDdId-1XBUCsJU74xyn2BCg0rsA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383840144664-c9ebgq4pq116i3aj6vujpak5hj3k6rca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383840144664:android:5f35895f1bf0b9e1",
+        "android_client_info": {
+          "package_name": "gauravdahale.gtech.citynews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383840144664-hp8i170ddsa4v0h8b033pkkqkh6g8a6d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gauravdahale.gtech.citynews",
+            "certificate_hash": "cd70bd2c619d7e22bdcf8055efd2a393ed39b289"
+          }
+        },
+        {
+          "client_id": "383840144664-c9ebgq4pq116i3aj6vujpak5hj3k6rca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwqWl8DDdId-1XBUCsJU74xyn2BCg0rsA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383840144664-c9ebgq4pq116i3aj6vujpak5hj3k6rca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383840144664:android:2e68e7d672f8746b",
+        "android_client_info": {
+          "package_name": "gauravdahale.gtech.rrcconsole"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383840144664-smj8ri80ma7mhvtkhp34m9erooapni5f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gauravdahale.gtech.rrcconsole",
+            "certificate_hash": "cd70bd2c619d7e22bdcf8055efd2a393ed39b289"
+          }
+        },
+        {
+          "client_id": "383840144664-c9ebgq4pq116i3aj6vujpak5hj3k6rca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwqWl8DDdId-1XBUCsJU74xyn2BCg0rsA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383840144664-c9ebgq4pq116i3aj6vujpak5hj3k6rca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

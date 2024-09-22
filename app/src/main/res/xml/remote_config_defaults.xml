@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?><!-- START xml_defaults -->
+<defaultsMap>
+    <entry>
+        <key>loading_phrase</key>
+        <value>Fetching config…</value>
+    </entry>
+    <entry>
+        <key>welcome_message_caps</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>welcome_message</key>
+        <value>Welcome to my awesome app!</value>
+    </entry>
+    <entry>
+        <key>URL1</key>
+        <value>
+            https://firebasestorage.googleapis.com/v0/b/akola-directory.appspot.com/o/hushe.jpg?alt=media&amp;token=57463ee0-a075-48ac-9f70-054eb52c693e
+        </value>
+    </entry>
+    <entry>
+        <key>URL2</key>
+        <value>
+            https://firebasestorage.googleapis.com/v0/b/akola-directory.appspot.com/o/hushe.jpg?alt=media&amp;token=57463ee0-a075-48ac-9f70-054eb52c693e
+        </value>
+    </entry>
+    <entry>
+        <key>URL3</key>
+        <value>
+            https://firebasestorage.googleapis.com/v0/b/akola-directory.appspot.com/o/indianelectronics.jpg?alt=media&amp;token=4e198145-19e8-4579-8eff-660efd23c42b
+        </value>
+    </entry>
+    <entry>
+        <key>URL4</key>
+        <value>
+            https://firebasestorage.googleapis.com/v0/b/akola-directory.appspot.com/o/ishwardas.jpg?alt=media&amp;token=2d970fc9-ef4f-42df-bd3e-9b0b20bbeb68
+        </value>
+    </entry>
+    <entry>
+        <key>URL5</key>
+        <value>
+            https://firebasestorage.googleapis.com/v0/b/akola-directory.appspot.com/o/mobilemagic.jpg?alt=media&amp;token=eda95569-6f42-48c8-9bc9-58e783aa1e5e
+        </value>
+    </entry>
+    <entry>
+        <key>URL6</key>
+        <value>
+            https://firebasestorage.googleapis.com/v0/b/akola-directory.appspot.com/o/banabani.jpg?alt=media&amp;token=5cc2906e-dffe-4685-a8f0-743a9430cc62
+        </value>
+    </entry>
+    <entry>
+        <key>URL7</key>
+        <value>
+            https://firebasestorage.googleapis.com/v0/b/akola-directory.appspot.com/o/indianelectronics.jpg?alt=media&amp;token=4e198145-19e8-4579-8eff-660efd23c42b
+        </value>
+    </entry>
+    <entry>
+        <key>URL8</key>
+        <value>
+            https://firebasestorage.googleapis.com/v0/b/akola-directory.appspot.com/o/ishwardas.jpg?alt=media&amp;token=2d970fc9-ef4f-42df-bd3e-9b0b20bbeb68
+        </value>
+    </entry>
+
+    <entry>
+        <key>URL9</key>
+        <value>
+            https://firebasestorage.googleapis.com/v0/b/akola-directory.appspot.com/o/hushe.jpg?alt=media&amp;token=57463ee0-a075-48ac-9f70-054eb52c693e
+        </value>
+    </entry>
+    <entry>
+        <key>URL10</key>
+        <value>
+            https://firebasestorage.googleapis.com/v0/b/akola-directory.appspot.com/o/indianelectronics.jpg?alt=media&amp;token=4e198145-19e8-4579-8eff-660efd23c42b
+        </value>
+    </entry>
+
+    <entry>
+        <key>URL11</key>
+        <value>https://image.ibb.co/f6h3u6/ayurprabha_banner.jpg</value>
+    </entry>
+
+    <entry>
+        <key>URL12</key>
+        <value>https://image.ibb.co/hJFs4m/banabani.jpg</value>
+    </entry>
+
+    <entry>
+        <key>URL13</key>
+        <value>
+            https://firebasestorage.googleapis.com/v0/b/akola-directory.appspot.com/o/indianelectronics.jpg?alt=media&amp;token=4e198145-19e8-4579-8eff-660efd23c42b
+        </value>
+    </entry>
+
+    <entry>
+        <key>URL14</key>
+        <value>https://image.ibb.co/f6h3u6/ayurprabha_banner.jpg</value>
+    </entry>
+
+    <entry>
+        <key>URL15</key>
+        <value>https://image.ibb.co/hJFs4m/banabani.jpg</value>
+    </entry>
+
+    <entry>
+        <key>URL16</key>
+        <value>https://image.ibb.co/f6h3u6/ayurprabha_banner.jpg</value>
+    </entry>
+
+    <entry>
+        <key>URL17</key>
+        <value>
+            https://firebasestorage.googleapis.com/v0/b/akola-directory.appspot.com/o/Pandtain2.jpg?alt=media&amp;token=8d1fd103-503d-41e9-92ff-6d1152038553
+        </value>
+    </entry>
+
+    <entry>
+        <key>URL18</key>
+        <value>
+            https://firebasestorage.googleapis.com/v0/b/akola-directory.appspot.com/o/ishwardas.jpg?alt=media&amp;token=2d970fc9-ef4f-42df-bd3e-9b0b20bbeb68
+        </value>
+    </entry>
+
+    <entry>
+        <key>URL19</key>
+        <value>
+            https://firebasestorage.googleapis.com/v0/b/akola-directory.appspot.com/o/hushe.jpg?alt=media&amp;token=57463ee0-a075-48ac-9f70-054eb52c693e
+        </value>
+    </entry>
+    <entry>
+        <key>URL20</key>
+        <value>https://image.ibb.co/gNWqPm/ishwardas1.jpg</value>
+    </entry>
+
+    <entry>
+        <key>background</key>
+        <value>#490409</value>
+    </entry>
+
+
+    <entry>
+        <key>splashscreen</key>
+        <value>https://res.cloudinary.com/akoladirectory/image/upload/v1581272207/amravatiposter.jpg
+        </value>
+    </entry>
+</defaultsMap><!-- END xml_defaults -->

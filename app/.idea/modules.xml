@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../AkolaDirectory.iml" filepath="$PROJECT_DIR$/../AkolaDirectory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../akolaadmin/akolaadmin.iml" filepath="$PROJECT_DIR$/../akolaadmin/akolaadmin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../akolacrm/akolacrm.iml" filepath="$PROJECT_DIR$/../akolacrm/akolacrm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app.iml" filepath="$PROJECT_DIR$/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../dynamic_feature/dynamic_feature.iml" filepath="$PROJECT_DIR$/../dynamic_feature/dynamic_feature.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../washim/washim.iml" filepath="$PROJECT_DIR$/../washim/washim.iml" />
+    </modules>
+  </component>
+</project>

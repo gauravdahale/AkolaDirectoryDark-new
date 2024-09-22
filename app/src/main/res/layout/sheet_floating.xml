@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="bottom"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_middle"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:id="@+id/bannerimage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_90sdp"
+                android:scaleType="fitXY"
+                android:src="@color/amber_200"/>
+           <!-- <ImageButton
+                android:id="@+id/bt_close"
+                android:layout_width="@dimen/spacing_mxlarge"
+                android:layout_height="@dimen/spacing_mxlarge"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_delete"
+                android:layout_gravity="end"/>-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/spacing_mxlarge"
+                android:orientation="horizontal"
+                >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/bannername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/copper_text_color" />
+
+                    <TextView
+                        android:id="@+id/banneraddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/brawler"
+                        android:textColor="@color/grey_50"
+                        tools:text="5 July 2017" />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/spacing_middle"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:background="@color/grey_5" />
+
+            <TextView
+                android:id="@+id/bannerdescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:fontFamily="monospace"
+                android:text="Description"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/copper_text_color"
+                android:textSize="12sp" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submit_rating"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_rounded_accent"
+                android:paddingLeft="@dimen/spacing_mlarge"
+                android:paddingRight="@dimen/spacing_mlarge"
+                android:text="CALL"
+
+                android:textAlignment="center"
+                android:textColor="@android:color/black" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

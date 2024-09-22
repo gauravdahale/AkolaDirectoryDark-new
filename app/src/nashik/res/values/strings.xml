@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Nashik Directory</string>
+
+    <string name="devolopername">Gaurav Dahale</string>
+    <string name="title_activity_splash_screen">Nashik Directory</string>
+    <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"http://akoladirectory.com\",\n  }\n}]</string>
+    <string name="facebook_application_id">370034057152788</string>
+    <string name="fb_login_protocol_scheme">fb370034057152788</string>
+
+    <string name="adunit_id">ca-app-pub-4353073709762339/7293683279</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_news_read">NewsReadActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="large_text">fdssdfds</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="Places">
+        <item>Nashik</item>
+        <item>Nashik Road</item>
+        <item>Malegaon</item>
+        <item>Igatpuri</item>
+        <item>Chandvad</item>
+        <item>Trimbakeshwar</item>
+        <item>Dindori</item>
+        <item>Niphad</item>
+        <item>Baglan</item>
+        <item>Kalwan</item>
+        <item>Sinnar</item>
+        <item>Peint</item>
+    </string-array>
+        <string name="recordlistbanner">ca-app-pub-4353073709762339/7656145852</string>
+        <string name="registerbanner">ca-app-pub-4353073709762339/2403819178</string>
+        <string name="registerinterstitial">ca-app-pub-4353073709762339/9044963730</string>
+        <string name="baherjatana">ca-app-pub-4353073709762339/7718551572</string>
+        <string name="recordbanner">ca-app-pub-4353073709762339/8777655836</string>
+        <string name="hashtag">#NashikDirectory</string>
+        <string name="facebooksharelink">https://play.google.com/store/apps/details?id=gauravdahale.gtech.nashikdirectory</string>
+        <string name="admob_id">ca-app-pub-4353073709762339~5280854836</string>
+        <string name="facebook_provider_id">com.facebook.app.FacebookContentProvider370034057152788</string>
+    <string name="facebookappmessage">आपल्या नाशिकची आपली अँप</string>
+
+</resources>

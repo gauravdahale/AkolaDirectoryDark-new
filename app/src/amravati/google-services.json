@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "398774431851",
+    "firebase_url": "https://amravati-directory.firebaseio.com",
+    "project_id": "amravati-directory",
+    "storage_bucket": "amravati-directory.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398774431851:android:472c6b02885dea3240812e",
+        "android_client_info": {
+          "package_name": "gauravdahale.gtech.amravatidirectory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398774431851-u6i286r2r86g07at0j05lg2thqsuhuee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMDGExpjXstVQgNCcjtEGrUDhtTADjBao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398774431851-u6i286r2r86g07at0j05lg2thqsuhuee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,1 @@
+include ':app', ':akolaadmin', ':dynamic_feature',":washim","akolacrm"

@@ -1,0 +1,3 @@
+package gauravdahale.gtech.akoladirectory
+
+class MainAdapter

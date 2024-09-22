@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Amravati Directory</string>
+
+    <string name="title_activity_splash_screen">Amravati Directory</string>
+    <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"http://akoladirectory.com\",\n  }\n}]</string>
+    <string name="facebook_application_id">377617299334175</string>
+    <string name="facebook_provider_id">com.facebook.app.FacebookContentProvider377617299334175</string>
+    <string name="admob_id">ca-app-pub-4353073709762339~3806739023</string>
+    <string name="registerbanner">ca-app-pub-4353073709762339/5528042470</string>
+    <string name="recordlistbanner">ca-app-pub-4353073709762339/9032528433</string>
+    <string name="recordbanner">ca-app-pub-4353073709762339/1952114761</string>
+    <string name="baherjatana" >ca-app-pub-4353073709762339/7171268962</string>
+    <string name="registerinterstitial">ca-app-pub-4353073709762339/8840956747</string>
+    <string name="facebooksharelink" >https://play.google.com/store/apps/details?id=gauravdahale.gtech.amravatidirectory</string>
+    <string name="facebookappmessage">आपल्या अमरावतीची आपली अँप</string>
+    <string name="hashtag">#amravatidirectory</string>
+
+    <string-array name="Places">
+        <item>Amravati</item>
+      <item>Dharni</item>
+      <item>Chikhaldara</item>
+      <item>Achalpur</item>
+      <item>Morshi</item>
+      <item>Anjangaon Surji</item>
+      <item>Bhatkuli</item>
+      <item>Daryapur</item>
+      <item>Dhamangaon</item>
+      <item>Chandur</item>
+      <item>Nandgaon</item>
+      <item>Warud</item>
+      <item>Teosa</item>
+    </string-array>
+
+</resources>

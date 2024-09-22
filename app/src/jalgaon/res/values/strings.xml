@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">Jalgaon Directory</string>
+
+    <string name="admob_id">ca-app-pub-4353073709762339~5620270846</string>
+    <string name="title_activity_splash_screen">Jalgaon Directory</string>
+    <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"http://akoladirectory.com\",\n  }\n}]</string>
+    <string name="facebook_application_id">196122014499404</string>
+    <string name="facebook_provider_id">com.facebook.app.FacebookContentProvider196122014499404</string>
+    <string name="recordlistbanner">ca-app-pub-4353073709762339/7676151170</string>
+    <string name="registerbanner">ca-app-pub-4353073709762339/2727076824</string>
+    <string name="registerinterstitial">ca-app-pub-4353073709762339/6216384758</string>
+    <string name="recordbanner">ca-app-pub-4353073709762339/3162191092</string>
+    <string name="baherjatana">ca-app-pub-4353073709762339/7721038117</string>
+    <string name="hashtag">#JalgaonDirectory</string>
+    <string name="facebooksharelink">https://play.google.com/store/apps/details?id=gauravdahale.gtech.jalgaondirectory</string>
+    <string name="facebookappmessage">आपल्या जळगावची आपली अँप</string>
+
+    <string-array name="Places">
+        <item>Jalgaon</item>
+        <item>Bhusawal</item>
+        <item>Chalisgaon</item>
+        <item>Pachora</item>
+        <item>Jamner</item>
+        <item>Chopda</item>
+        <item>Amalner</item>
+        <item>Yawal</item>
+        <item>Parola</item>
+        <item>Dharangaon</item>
+        <item>Erandol</item>
+        <item>Mukainagar</item>
+        <item>Bhadgaon</item>
+        <item>Bodvad</item>
+
+    </string-array>
+    <string-array name="BloodTypes">
+
+        <item>--</item>
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>O+</item>
+        <item>O-</item>
+    </string-array>
+</resources>

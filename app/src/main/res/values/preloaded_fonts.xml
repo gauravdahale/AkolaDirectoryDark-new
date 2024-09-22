@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/abhaya_libre</item>
+        <item>@font/abhaya_libre_medium</item>
+        <item>@font/adamina</item>
+        <item>@font/aldrich</item>
+        <item>@font/baloo</item>
+        <item>@font/brawler</item>
+        <item>@font/cabin</item>
+        <item>@font/gidugu</item>
+    </array>
+</resources>

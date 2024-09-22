@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "731878298044",
+    "firebase_url": "https://nashikdirectory-83908.firebaseio.com",
+    "project_id": "nashikdirectory-83908",
+    "storage_bucket": "nashikdirectory-83908.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731878298044:android:570019a877d73300",
+        "android_client_info": {
+          "package_name": "gauravdahale.gtech.nashikdirectory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731878298044-lk5190hk79m0doe2vbeiglrja8of298d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gauravdahale.gtech.nashikdirectory",
+            "certificate_hash": "cd70bd2c619d7e22bdcf8055efd2a393ed39b289"
+          }
+        },
+        {
+          "client_id": "731878298044-eadcsv6pmoedua8g6g52fthtn8rhqhb9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3Alwcv0eiK_0c0DHNkUbn4Ncx4ld1-40"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "731878298044-eadcsv6pmoedua8g6g52fthtn8rhqhb9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

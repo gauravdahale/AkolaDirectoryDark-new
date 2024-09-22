@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+<TextView
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:text="Select Your Place"
+    android:padding="8dp"
+    android:textAlignment="center"
+
+    android:textColor="@android:color/white"
+    android:textStyle="bold"
+    android:textSize="@dimen/_12sdp"
+    android:fontFamily="@font/baloo"
+    android:background="@color/colorPrimaryDark"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/place_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        tools:itemCount="5"
+        tools:listitem="@layout/itemview_place" />
+</LinearLayout>

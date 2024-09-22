@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_48dp"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_homeservices"
+            android:icon="@drawable/ic_arrow"
+            android:title="Home Services" />
+
+        <item
+            android:id="@+id/nav_shopping"
+            android:icon="@drawable/ic_arrow"
+            android:title="Shopping" />
+        <item
+            android:id="@+id/nav_health"
+            android:icon="@drawable/ic_arrow"
+            android:title="Health" />
+        <item
+            android:id="@+id/nav_construction"
+            android:icon="@drawable/ic_arrow"
+            android:title="Construction" />
+        <item
+            android:id="@+id/nav_services"
+            android:icon="@drawable/ic_arrow"
+            android:title="Services" />
+        <item
+            android:id="@+id/nav_education"
+            android:icon="@drawable/ic_arrow"
+            android:title="Education" />
+        <item
+            android:id="@+id/nav_emergency"
+            android:icon="@drawable/ic_arrow"
+            android:title="Emergency" />
+        <item
+            android:id="@+id/nav_automobiles"
+            android:icon="@drawable/ic_arrow"
+            android:title="Automobiles" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_account_box_black_48dp"
+            android:title="Update Profile" />
+        <item
+            android:id="@+id/nav_register"
+            android:icon="@drawable/ic_contact_phone_black_48dp"
+            android:title="Register Business" />
+        <item
+            android:id="@+id/nav_contactus"
+            android:icon="@drawable/ic_chat_black_48dp"
+            android:title="Contact Us" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+
+</menu>

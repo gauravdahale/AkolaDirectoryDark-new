@@ -1,0 +1,102 @@
+{
+  "project_info": {
+    "project_number": "122593266150",
+    "firebase_url": "https://jalgaon-directory.firebaseio.com",
+    "project_id": "jalgaon-directory",
+    "storage_bucket": "jalgaon-directory.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122593266150:android:70a06a617bc08968",
+        "android_client_info": {
+          "package_name": "gauravdahale.gtech.jalgaondirectory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122593266150-1rtmut2b7t1h2747orgcm3ot4n5bo267.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gauravdahale.gtech.jalgaondirectory",
+            "certificate_hash": "d5adf14666d16db0c56fbd5621b30ab727da6d8c"
+          }
+        },
+        {
+          "client_id": "122593266150-418jfvo9a649gjtgjeb2fksd6lflasep.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gauravdahale.gtech.jalgaondirectory",
+            "certificate_hash": "cd70bd2c619d7e22bdcf8055efd2a393ed39b289"
+          }
+        },
+        {
+          "client_id": "122593266150-3ljjo4etd6nsjmvbj5g31llcl4apur9u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gauravdahale.gtech.jalgaondirectory",
+            "certificate_hash": "ac554835eceaaa59a452a22aa98bf81dbb927ff8"
+          }
+        },
+        {
+          "client_id": "122593266150-l1mrcv00cgnetl3b3utevgdnbc7bmhf2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiHZQSIrb-CC5Z9-L468Zqh8C--xu_wyk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122593266150-l1mrcv00cgnetl3b3utevgdnbc7bmhf2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122593266150:android:55ef09d6f0cc3a60",
+        "android_client_info": {
+          "package_name": "gauravdahale.gtech.jalgaonrequest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122593266150-l1mrcv00cgnetl3b3utevgdnbc7bmhf2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiHZQSIrb-CC5Z9-L468Zqh8C--xu_wyk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

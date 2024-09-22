@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/id_verify_phone"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_120sdp"
+        android:background="@drawable/ic_wave__7_"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/logo" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/relativeLayout"
+        android:orientation="vertical"
+        android:clipChildren="false"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+
+            android:fontFamily="@font/baloo"
+            android:text="Sit back and relax while we verify your mobile number"
+            android:textAlignment="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:id="@+id/editTextCode"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progressbar"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/blue_900"
+            android:digits="0123456789"
+            android:drawablePadding="10dp"
+            android:hint="Enter OTP"
+            android:inputType="phone"
+            android:maxLength="100"
+            android:textColor="@color/copper_text_color"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonSignIn"
+            android:layout_below="@id/editTextCode"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:text="Sign In"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:layout_width="150dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="40dp"
+            android:drawablePadding="14dp"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/white"
+            android:backgroundTint="#426bb6"
+            app:cornerRadius="28dp"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/resendbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@+id/progressbar"
+            android:layout_marginStart="-20dp"
+            android:layout_marginTop="7dp"
+            android:layout_toEndOf="@+id/editTextCode"
+            android:backgroundTint="@color/amber_400"
+            android:onClick="resendVerificationCode"
+            android:text="RESEND"
+            android:textColor="@color/synthcolor"
+            android:typeface="sans" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

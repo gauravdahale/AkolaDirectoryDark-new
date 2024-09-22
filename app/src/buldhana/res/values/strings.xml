@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Buldhana Directory</string>
+
+    <string name="title_activity_splash_screen">Buldhana Directory</string>
+    <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"http://akoladirectory.com\",\n  }\n}]</string>
+    <string name="facebook_application_id">258004391401150</string>
+    <string name="facebook_provider_id">com.facebook.app.FacebookContentProvider258004391401150</string>
+    <string name="recordlistbanner">ca-app-pub-4353073709762339/9375072196</string>
+    <string name="baherjatana">ca-app-pub-4353073709762339/9120334982</string>
+    <string name="registerbanner">ca-app-pub-4353073709762339/9843688865</string>
+    <string name="registerinterstitial">ca-app-pub-4353073709762339/5110927667</string>
+    <string name="recordbanner">ca-app-pub-4353073709762339/6228010400</string>
+    <string name="hashtag">#BuldhanaDirectory</string>
+    <string name="facebooksharelink">https://www.facebook.com/buldhanadirectory/videos/947142758818312/</string>
+
+    <string name="admob_id">ca-app-pub-4353073709762339~4706637010</string>
+    <string-array name="Places">
+        <item>Khamgaon</item>
+        <item>Buldhana</item>
+        <item>Shegaon</item>
+        <item>Nandura</item>
+        <item>Sangrampur</item>
+        <item>Jalgaon Jamod</item>
+        <item>Chikhali</item>
+        <item>Malkapur</item>
+        <item>Mehkar</item>
+        <item>Lonar</item>
+        <item>Motala</item>
+        <item>DeolGaon Raja</item>
+        <item>Sindkhed Raja</item>
+    </string-array>
+</resources>

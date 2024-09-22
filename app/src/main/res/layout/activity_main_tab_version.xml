@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="gauravdahale.gtech.akoladirectory.activity.MainActivityTabVersion">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbartab"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:title="@string/app_name">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/actionBarSize">
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="150dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="start"
+                        android:layout_weight="5"
+                        android:foregroundGravity="center_vertical"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/akoladirectory" />
+
+                    <ImageView
+                        android:id="@+id/deals"
+                        android:layout_width="95dp"
+                        android:layout_height="45dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toEndOf="@id/imageView2"
+                        android:layout_weight="3"
+                        android:cropToPadding="false"
+                        app:srcCompat="@drawable/deals" />
+
+                    <ImageView
+                        android:id="@+id/registershop"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toEndOf="@id/deals"
+                        android:layout_weight="1"
+                        android:src="@drawable/register1" />
+
+                    <ImageView
+                        android:id="@+id/sharebtn"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toEndOf="@id/registershop"
+                        android:layout_weight="1"
+                        android:src="@drawable/sharebtn" />
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/locationspinner"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
+                    android:paddingStart="6dp"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
+                <TextView
+                    android:id="@+id/marquee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:freezesText="true"
+
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:paddingRight="5dp"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="* कामाकरीता मुले/मूली पाहिजेत संपर्क 8208044979 * तालुक्यासाठी फ्रैंचाइज़ी देने आहे इच्छुक असल्यास संपर्क  साधावा * "
+                    android:textColor="@android:color/white" />
+
+            </LinearLayout>
+
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/slider"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="1dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:background="@color/colorPrimary"
+                android:textAlignment="center"
+                app:tabIndicatorColor="@color/browser_actions_bg_grey"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@android:color/white"
+                app:tabTextAppearance="@style/TextAppearance.AppCompat.Small" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/newViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+            <com.daimajia.slider.library.SliderLayout
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignBottom="@id/newViewPager"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="1dp" />
+        </RelativeLayout>
+    </LinearLayout>
+    <!--bottom sheet container-->
+    <FrameLayout
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/bottom_sheet_behavior" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

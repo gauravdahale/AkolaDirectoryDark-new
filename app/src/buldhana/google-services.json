@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "884083362195",
+    "project_id": "buldhana-directory",
+    "storage_bucket": "buldhana-directory.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884083362195:android:8e1894a53446dc4207c066",
+        "android_client_info": {
+          "package_name": "com.gtech.buldhanadirectory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "884083362195-337cvobv3kpjoet5utdeu6enl8stp618.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRL24U-VATWbMqANieaC3m7Y5pGaf6yjw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "884083362195-337cvobv3kpjoet5utdeu6enl8stp618.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

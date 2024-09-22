@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:layout_editor_absoluteY="81dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_dark"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/abhaya_libre"
+                android:text="Name-"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="11dp"
+                android:text="Add-"
+                android:fontFamily="@font/abhaya_libre"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shopname" />
+
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="0dp"
+                android:fontFamily="@font/abhaya_libre"
+
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Phone-"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shopaddress" />
+
+            <TextView
+
+                android:fontFamily="@font/abhaya_libre"
+                android:id="@+id/shopname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:text="nametext"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                app:layout_constraintBaseline_toBaselineOf="@+id/name"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toRightOf="@+id/name"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/shopaddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+
+                android:fontFamily="@font/abhaya_libre"
+                android:layout_marginRight="8dp"
+                android:text="Adresstxt"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                app:layout_constraintBaseline_toBaselineOf="@+id/address"
+                app:layout_constraintHorizontal_bias="0.485"
+                app:layout_constraintLeft_toRightOf="@+id/address"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/shopphone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:autoLink="all"
+
+                android:fontFamily="monospace"
+                android:text="Phonetxt"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                app:layout_constraintBaseline_toBaselineOf="@+id/phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/phone" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+
+                android:fontFamily="@font/abhaya_libre"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Username"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phone" />
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="0dp"
+
+                android:fontFamily="@font/abhaya_libre"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/shopphone"
+                tools:text="username" />
+
+            <TextView
+                android:id="@+id/textView3"
+
+                android:fontFamily="@font/abhaya_libre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="UserPhone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <TextView
+
+                android:id="@+id/userphone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:autoLink="phone"
+                android:fontFamily="monospace"
+                android:text="TextView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView3"
+                app:layout_constraintTop_toBottomOf="@+id/username" />
+
+
+            <TextView
+                android:id="@+id/createdat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+
+                android:fontFamily="@font/abhaya_libre"
+                android:layout_marginEnd="8dp"
+                android:textColor="#221095"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+                tools:text="@sample/tools:date/day_of_week"
+                android:layout_marginRight="8dp" />
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+
+                android:fontFamily="@font/abhaya_libre"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/status">
+
+                <EditText
+                    android:id="@+id/editeremark"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="40dp"
+                    android:fontFamily="@font/abhaya_libre"
+                    android:hint="Add Remark"
+                    android:textSize="15sp" />
+
+                <ImageButton
+                    android:id="@+id/sendbtn"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@android:drawable/ic_menu_send" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/abhaya_libre"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/holo_purple"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userphone" />
+
+            <ImageButton
+                android:id="@+id/deletebutton"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+                app:srcCompat="@android:drawable/ic_delete"
+                android:layout_marginLeft="8dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

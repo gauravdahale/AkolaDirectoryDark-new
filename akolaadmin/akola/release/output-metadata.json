@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.gtech.akoladirectory",
+  "variantName": "processAkolaReleaseResources",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "versionCode": 86,
+      "versionName": "86",
+      "outputFile": "app-akola-release.apk"
+    }
+  ]
+}
