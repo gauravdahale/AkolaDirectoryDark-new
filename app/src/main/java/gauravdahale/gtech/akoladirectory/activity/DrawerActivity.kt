@@ -181,7 +181,7 @@ val MY_REQUEST_CODE=200
 
     private fun storePlacePreference() {
         val prefs: SharedPreferences = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
-        Log.d("PLACE ON START", prefs.getString("PLACE", ""))
+//        Log.d("PLACE ON START", prefs.getString("PLACE", ""))
         val place = prefs.getString("PLACE", "")
         if (prefs.getString("PLACE", "") == "") {
 

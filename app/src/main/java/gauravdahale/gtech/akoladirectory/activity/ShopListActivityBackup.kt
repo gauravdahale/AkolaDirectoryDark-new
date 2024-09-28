@@ -133,7 +133,7 @@ class ShopListActivityBackup : AppCompatActivity() {
         val query = FirebaseDatabase.getInstance()
                 //  .reference.child(Place!!)
                 .reference.child(Place!!)
-                .child(title)
+                .child(title!!)
 
 
         val options = FirebaseRecyclerOptions.Builder<ContactModel>().setLifecycleOwner(this)

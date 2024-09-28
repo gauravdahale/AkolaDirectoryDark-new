@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
         val v = inflater.inflate(R.layout.fragment_home, container, false)
         val recyclerview = v.findViewById<RecyclerView>(R.id.home_recyclerview)
         val prefs: SharedPreferences = activity!!.getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
-        Log.d("PLACE ON START", prefs.getString("PLACE", ""))
+        Log.d("PLACE ON START", prefs.getString("PLACE", "")!!)
         if(prefs.getString("PLACE", "")==null){
             val editor = prefs.edit()
             editor.putString("PLACE", "Akola")

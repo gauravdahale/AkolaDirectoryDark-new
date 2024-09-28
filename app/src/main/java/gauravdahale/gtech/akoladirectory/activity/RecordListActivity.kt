@@ -208,7 +208,7 @@ class RecordListActivity : AppCompatActivity() {
         val query = FirebaseDatabase.getInstance()
                 //  .reference.child(Place!!)
                 .reference.child("Akola")
-                .child(title)
+                .child(title!!)
 
 
         val options = FirebaseRecyclerOptions.Builder<ContactModel>().setLifecycleOwner(this)

@@ -86,7 +86,7 @@ lateinit var mAnalytics: FirebaseAnalytics
         val query = place?.let {
             FirebaseDatabase.getInstance()
                 .reference.child(it)
-                .child(title)
+                .child(title!!)
         }
 
 

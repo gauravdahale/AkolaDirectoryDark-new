@@ -121,13 +121,13 @@ class RecordActivity : AppCompatActivity(), View.OnClickListener {
                 couneditxt?.setText(contactModel.c)
                 ideditxt?.setText(id)
                 Glide.with(applicationContext).load(contactModel.i).error(R.drawable.photoicon)
-                    .into(image1)
+                    .into(image1!!)
                 Glide.with(applicationContext).load(contactModel.ii).error(R.drawable.photoicon)
-                    .into(image2)
+                    .into(image2!!)
                 Glide.with(applicationContext).load(contactModel.iii).error(R.drawable.photoicon)
-                    .into(image3)
+                    .into(image3!!)
                 Glide.with(applicationContext).load(contactModel.iiii).error(R.drawable.photoicon)
-                    .into(image4)
+                    .into(image4!!)
                 name = nameeditxt?.text.toString().trim { it <= ' ' }
                 owner = ownereditxt?.text.toString().trim { it <= ' ' }
                 address = addresseditxt?.text.toString().trim { it <= ' ' }
