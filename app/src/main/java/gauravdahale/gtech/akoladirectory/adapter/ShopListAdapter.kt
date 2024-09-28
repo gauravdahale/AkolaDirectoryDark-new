@@ -1,5 +1,6 @@
 package gauravdahale.gtech.akoladirectory.adapter
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -258,7 +259,7 @@ ref.child("totalreviews")?.setValue(count.toInt().toString())
                 calldate
         )
         val databasereference = FirebaseDatabase.getInstance().reference
-        databasereference.child("CallLog").child(shoptitle).push().setValue(call)
+//        databasereference.child("CallLog").child(shoptitle).push().setValue(call)
 
     }
 
@@ -301,6 +302,7 @@ class DiffUtilCallback : DiffUtil.ItemCallback<ContactModel>() {
         return oldItem.key == newItem.key
     }
 
+    @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: ContactModel, newItem: ContactModel): Boolean {
         return oldItem.equals(newItem)
     }
