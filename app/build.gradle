@@ -4,6 +4,7 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.firebase.crashlytics'
 android {
+    //WORKING IN ANDROID QUALA 2024
     signingConfigs {
         config {
             keyAlias 'key0'
