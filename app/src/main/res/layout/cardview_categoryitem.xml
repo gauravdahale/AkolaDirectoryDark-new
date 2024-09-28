@@ -59,7 +59,7 @@
                     android:marqueeRepeatLimit="marquee_forever"
                     android:singleLine="true"
 
-                    android:background="@color/fui_transparent"
+                    android:background="#00FFFFFF"
                     android:padding="2dp"
                     android:textAlignment="center"
                     android:focusable="true"
