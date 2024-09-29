@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
@@ -24,10 +25,12 @@ import gauravdahale.gtech.akoladirectory.ItemClickListener
 import gauravdahale.gtech.akoladirectory.R
 
 import gauravdahale.gtech.akoladirectory.data.OfferModel
-import kotlinx.android.synthetic.main.activity_offers.*
+import gauravdahale.gtech.akoladirectory.databinding.ActivityOffersBinding
 import java.util.*
 
 class OffersActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityOffersBinding // Replace with your actual binding class name
+
     private var securekey: String? = null
     internal var database = FirebaseDatabase.getInstance()
     private val fab: FloatingActionButton? = null
@@ -65,108 +68,81 @@ class OffersActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_offers)
-        setSupportActionBar(toolbaroffers)
-        val empty = findViewById<View>(R.id.emptyofferview) as ImageView
-        empty.visibility = View.GONE
+        binding = ActivityOffersBinding.inflate(layoutInflater) // Inflate the binding
+        setContentView(binding.root) // Set the content view to the root of the binding
+
+        setSupportActionBar(binding.toolbaroffers) // Use binding to set the toolbar
+
         securekey = BuildConfig.Firebaseseckey
-//        val ADMOBID = "ca-app-pub-4353073709762339~9362988006"
-//
-//        MobileAds.initialize(this, ADMOBID)
-//        val adRequest = AdRequest.Builder().build()
-//        adView.loadAd(adRequest)
-        mRecyclerView = findViewById<View>(R.id.offersrecyclerview) as RecyclerView
-        noOffers = findViewById<View>(R.id.emptyofferview) as ImageView
-        // shrinkAnim = ScaleAnimation(1.15f, 0.0f, 1.15f, 0.0f, 1, 0.5f, 1, 0.5f)
+
+        mRecyclerView = binding.offersrecyclerview // Use binding to reference the RecyclerView
+        noOffers = binding.emptyofferview // Use binding to reference the empty view
+        noOffers?.visibility = View.GONE
+
         title = "Offers and Events"
         linearLayoutManager = LinearLayoutManager(applicationContext)
-        mRecyclerView!!.layoutManager = this.linearLayoutManager
+        mRecyclerView?.layoutManager = linearLayoutManager
+
         val query = FirebaseDatabase.getInstance()
-                .reference.child("directory")
-                .child("Offer")
+            .reference.child("directory")
+            .child("Offer")
         val options = FirebaseRecyclerOptions.Builder<OfferModel>()
-                .setQuery(query, OfferModel::class.java)
-                .build()
+            .setQuery(query, OfferModel::class.java)
+            .build()
 
+        adapter = object : FirebaseRecyclerAdapter<OfferModel, ItemViewHolder>(options) {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+                val view = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.offers_card, parent, false)
+                return ItemViewHolder(view)
+            }
 
-        adapter =
-                object : FirebaseRecyclerAdapter<OfferModel, ItemViewHolder>(options) {
-                    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-                        val view = LayoutInflater.from(parent.context)
-                                .inflate(R.layout.offers_card, parent, false)
-                        return ItemViewHolder(view)
-                    }
-
-                    override fun onBindViewHolder(
-                            viewHolder: ItemViewHolder,
-                            position: Int,
-                            offers: OfferModel
-                    ) {
-
-                        viewHolder.OfferDetails.text = offers.od
-                        Picasso.with(applicationContext).load(offers.oi)
-                                .networkPolicy(NetworkPolicy.OFFLINE)
-                                .into(viewHolder.OfferImage, object : Callback {
-                                    override fun onSuccess() {
-
-                                    }
-
-                                    override fun onError() {
-                                        Picasso.with(this@OffersActivity).load(offers.oi)
-                                                .into(viewHolder.OfferImage)
-                                    }
-
-                                })
-                        if (offers.oi == null) {
-                            viewHolder.OfferImage.setImageResource(R.drawable.noimage)
-                        }
-                        val postRef = getRef(position)
-
-                        viewHolder.setItemOnClickListener(ItemClickListener { pos ->
-                            postRef.child("c").runTransaction(object : Transaction.Handler {
-                                override fun doTransaction(currentData: MutableData): Transaction.Result {
-                                    if (currentData.value == null) {
-                                        val r = Random()
-                                        val random = Random().nextInt(300) + 500
-
-                                        val randomcount = Integer.toString(random)
-                                        currentData.value = randomcount
-                                    } else {
-                                        val stringValue = currentData.value as String?
-                                        val intValue = Integer.parseInt(stringValue!!)
-                                        val increasedIntValue = intValue + 1
-                                        currentData.value = increasedIntValue.toString()
-                                    }
-                                    return Transaction.success(currentData)
-                                }
-
-                                override fun onComplete(
-                                        databaseError: DatabaseError?,
-                                        committed: Boolean,
-                                        currentData: DataSnapshot?
-                                ) {
-                                    if (databaseError != null) {
-                                        println("Firebase counter increment failed!")
-                                    } else {
-                                        println("Firebase counter increment succeeded!")
-                                    }
-                                }
-                            })
-
-                            var reference = adapter?.getRef(pos).toString()
-                            val intent = Intent(applicationContext, OfferDetailActivity::class.java)
-                            intent.putExtra("parcel", offers)
-
-                            startActivity(intent)
-
-
-                        })
-                    }
+            override fun onBindViewHolder(viewHolder: ItemViewHolder, position: Int, offers: OfferModel) {
+                viewHolder.OfferDetails.text = offers.od
+                Glide.with(viewHolder.OfferImage.context)
+                    .load(offers.oi)
+//                    .placeholder(R.drawable.loading_placeholder) // Placeholder while loading
+                    .error(R.drawable.noimage) // Error image if loading fails
+                    .into(viewHolder.OfferImage)
+                if (offers.oi == null) {
+                    viewHolder.OfferImage.setImageResource(R.drawable.noimage)
                 }
 
-        mRecyclerView!!.adapter = adapter
+                val postRef = getRef(position)
 
+                viewHolder.setItemOnClickListener(ItemClickListener { pos ->
+                    postRef.child("c").runTransaction(object : Transaction.Handler {
+                        override fun doTransaction(currentData: MutableData): Transaction.Result {
+                            if (currentData.value == null) {
+                                val randomCount = (Random().nextInt(300) + 500).toString()
+                                currentData.value = randomCount
+                            } else {
+                                val intValue = (currentData.value as String).toInt()
+                                currentData.value = (intValue + 1).toString()
+                            }
+                            return Transaction.success(currentData)
+                        }
+
+                        override fun onComplete(databaseError: DatabaseError?, committed: Boolean, currentData: DataSnapshot?) {
+                            if (databaseError != null) {
+                                println("Firebase counter increment failed!")
+                            } else {
+                                println("Firebase counter increment succeeded!")
+                            }
+                        }
+                    })
+
+                    val intent = Intent(applicationContext, OfferDetailActivity::class.java)
+                    intent.putExtra("parcel", offers)
+                    startActivity(intent)
+                })
+            }
+        }
+
+        mRecyclerView?.adapter = adapter
     }
+
+
 
     override fun onStart() {
         super.onStart()
@@ -178,6 +154,7 @@ class OffersActivity : AppCompatActivity() {
         adapter?.stopListening()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         super.onBackPressed()
     }

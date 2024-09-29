@@ -57,7 +57,6 @@ import gauravdahale.gtech.akoladirectory.ItemClickListener
 import gauravdahale.gtech.akoladirectory.models.ContactModel
 import gauravdahale.gtech.akoladirectory.R
 import gauravdahale.gtech.akoladirectory.models.CallModel
-import kotlinx.android.synthetic.main.cattoolbar.view.*
 
 class RecordListActivity : AppCompatActivity() {
     internal var database = FirebaseDatabase.getInstance()
@@ -152,7 +151,7 @@ class RecordListActivity : AppCompatActivity() {
         val titlebar = intent.getStringExtra("Settitle")
         val City = intent.getStringExtra("Place")
 
-        toolbar.catoolbartext.text = titlebar
+        toolbar.findViewById<TextView>(R.id.catoolbartext).text = titlebar
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         //Code to change the back drawable color
         toolbar.getNavigationIcon()?.setColorFilter(getResources().getColor(R.color.colorPrimaryDark)
@@ -304,8 +303,8 @@ class RecordListActivity : AppCompatActivity() {
                         logcall(shopname!!, storedname, storedphone, date)
 
 
-                        if (phone!!.contains(SEPARATOR)) {
-                            val parts = phone?.split(SEPARATOR.toRegex()).dropLastWhile { it.isEmpty() }
+                        if (phone.contains(SEPARATOR)) {
+                            val parts = phone.split(SEPARATOR.toRegex()).dropLastWhile { it.isEmpty() }
                                     .toTypedArray()
 
                             n1 = parts[0]
@@ -479,6 +478,7 @@ class RecordListActivity : AppCompatActivity() {
         adapter.stopListening()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         super.onBackPressed()
     }

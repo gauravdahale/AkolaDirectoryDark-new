@@ -20,6 +20,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -50,14 +51,12 @@ import gauravdahale.gtech.akoladirectory.fragments.*
 import gauravdahale.gtech.akoladirectory.models.UserModel
 import gauravdahale.gtech.akoladirectory.R
 import gauravdahale.gtech.akoladirectory.adapter.PlaceAdapter
-import kotlinx.android.synthetic.main.activity_drawer.*
-import kotlinx.android.synthetic.main.app_bar_drawer.*
 import kotlinx.coroutines.*
 import java.lang.Runnable
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
 
-        ChangeFragment {
+    ChangeFragment {
     override fun inflateFragment(fragmentTag: String, message: String, bundle: Bundle?) {
 
         if (fragmentTag == "ItemListActivity") {
@@ -89,23 +88,24 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     private var mBehavior: BottomSheetBehavior<*>? = null
     private var mBottomSheetDialog: BottomSheetDialog? = null
     lateinit var dialog: Dialog
-val TAG = "Drawer Activity"
+    val TAG = "Drawer Activity"
     ///-------------------------------------------------------------------------------------------------
-private  var appUpdateManager: AppUpdateManager?=null
-val MY_REQUEST_CODE=200
-   private  lateinit var listener: InstallStateUpdatedListener
+    private  var appUpdateManager: AppUpdateManager?=null
+    val MY_REQUEST_CODE=200
+    private  lateinit var listener: InstallStateUpdatedListener
+    private  lateinit var   drawer_layout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appUpdateManager == AppUpdateManagerFactory.create(this)
         setContentView(R.layout.activity_drawer)
-
+drawer_layout = findViewById(R.id.drawer_layout)
         val toolbarmain = findViewById<Toolbar>(R.id.toolbarmain)
 // Creates instance of the manager.
 
         //    setSupportActionBar(toolbarmain)
         //  toolbarmain.setNavigationIcon(R.drawable.logo)
-          listener = InstallStateUpdatedListener { installState ->
+        listener = InstallStateUpdatedListener { installState ->
             if (installState.installStatus() == InstallStatus.DOWNLOADED) {
                 // After the update is downloaded, show a notification
                 // and request user confirmation to restart the app.
@@ -136,7 +136,7 @@ val MY_REQUEST_CODE=200
         val bottom_sheet = findViewById<View>(R.id.bottom_sheet)
         mBehavior = BottomSheetBehavior.from<View>(bottom_sheet)
 //------------------------------------------PLACE SELECTOR------------------------------------------
-        home_bar_location.setOnClickListener {
+     findViewById<ImageView>(R.id.home_bar_location).setOnClickListener {
             placeDialog()
 
 
@@ -146,11 +146,11 @@ val MY_REQUEST_CODE=200
         mHandler = Handler()
         sliderHandler = Handler()
         val toggle = ActionBarDrawerToggle(
-                this,
-                drawer_layout,
-                toolbarmain,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close
+            this,
+            drawer_layout,
+            toolbarmain,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         //     toggle.setDrawerIndicatorEnabled(false);
         //       toggle.setHomeAsUpIndicator(R.drawable.hamburgericon);
@@ -167,7 +167,7 @@ val MY_REQUEST_CODE=200
         };
         toggle.syncState()
 
-        nav_view.setNavigationItemSelectedListener(this)
+     findViewById<NavigationView>(R.id.nav_view).setNavigationItemSelectedListener(this)
         setupmainslider()
 
         if (savedInstanceState == null) {
@@ -181,7 +181,7 @@ val MY_REQUEST_CODE=200
 
     private fun storePlacePreference() {
         val prefs: SharedPreferences = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
-//        Log.d("PLACE ON START", prefs.getString("PLACE", ""))
+        prefs.getString("PLACE", "")?.let { Log.d("PLACE ON START", it) }
         val place = prefs.getString("PLACE", "")
         if (prefs.getString("PLACE", "") == "") {
 
@@ -190,13 +190,13 @@ val MY_REQUEST_CODE=200
             editor.putString("PLACE", placearray[0])
             editor.apply()
 
-    //            Toast.makeText(DrawerActivity@ this, "Akola City Selected", Toast.LENGTH_SHORT).show()
-    //        placeDialog()
+            //            Toast.makeText(DrawerActivity@ this, "Akola City Selected", Toast.LENGTH_SHORT).show()
+            //        placeDialog()
         }
     }
 
 
-//
+    //
     public fun placeDialog() {
         dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -226,12 +226,12 @@ val MY_REQUEST_CODE=200
                         val textSliderView = DefaultSliderView(applicationContext)
                         // initialize a SliderLayout
                         textSliderView
-                                .image(post!!.i).empty(R.drawable.akolanotice)
+                            .image(post!!.i).empty(R.drawable.akolanotice)
 
-                                .setOnSliderClickListener {
-                                    //Toast.makeText(getApplicationContext(), "clicked image= "+post.getN(), Toast.LENGTH_SHORT).show();
-                                    runOnUiThread { showBottomSheetDialog(post) }
-                                }.scaleType = BaseSliderView.ScaleType.Fit
+                            .setOnSliderClickListener {
+                                //Toast.makeText(getApplicationContext(), "clicked image= "+post.getN(), Toast.LENGTH_SHORT).show();
+                                runOnUiThread { showBottomSheetDialog(post) }
+                            }.scaleType = BaseSliderView.ScaleType.Fit
 
                         mDemoSlider.addSlider(textSliderView)
 
@@ -281,7 +281,7 @@ val MY_REQUEST_CODE=200
         mBottomSheetDialog?.setContentView(view)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mBottomSheetDialog?.window!!.addFlags(WindowManager.LayoutParams
-                    .FLAG_TRANSLUCENT_STATUS)
+                .FLAG_TRANSLUCENT_STATUS)
         }
 
         // set background transparent
@@ -300,11 +300,11 @@ val MY_REQUEST_CODE=200
             val fragment = fragment
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.setCustomAnimations(
-                    android.R.anim.fade_in,
-                    android.R.anim.fade_out
+                android.R.anim.fade_in,
+                android.R.anim.fade_out
             )
             fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG)
-fragmentTransaction.addToBackStack(CURRENT_TAG)
+            fragmentTransaction.addToBackStack(CURRENT_TAG)
             fragmentTransaction.commitAllowingStateLoss()
         }
 
@@ -326,8 +326,8 @@ fragmentTransaction.addToBackStack(CURRENT_TAG)
             val fragment = fragment
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.setCustomAnimations(
-                    android.R.anim.fade_in,
-                    android.R.anim.fade_out
+                android.R.anim.fade_in,
+                android.R.anim.fade_out
             )
             fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG)
             fragmentTransaction.addToBackStack(tag)
@@ -361,22 +361,22 @@ fragmentTransaction.addToBackStack(CURRENT_TAG)
 //            }
 //        }
 //    }
-/*
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.home, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        when (item.itemId) {
-            R.id.action_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
+    /*
+        override fun onCreateOptionsMenu(menu: Menu): Boolean {
+            // Inflate the menu; this adds items to the action bar if it is present.
+            menuInflater.inflate(R.menu.home, menu)
+            return true
         }
-    }*/
+
+        override fun onOptionsItemSelected(item: MenuItem): Boolean {
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
+            // as you specify a parent activity in AndroidManifest.xml.
+            when (item.itemId) {
+                R.id.action_settings -> return true
+                else -> return super.onOptionsItemSelected(item)
+            }
+        }*/
 
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -485,7 +485,7 @@ fragmentTransaction.addToBackStack(CURRENT_TAG)
         }
 
     fun loadNavHeader() {
-        navHeader = nav_view.getHeaderView(0)
+        navHeader = findViewById<NavigationView>(R.id.nav_view).getHeaderView(0)
         txtname = navHeader?.findViewById(R.id.username)
         txtcity = navHeader?.findViewById(R.id.usercity)
         val navimage = navHeader?.findViewById(R.id.header_image) as ImageView
@@ -512,9 +512,9 @@ fragmentTransaction.addToBackStack(CURRENT_TAG)
         // urls to load navigation header background image
         // and profile image
         private val urlNavHeaderBg =
-                "https://firebasestorage.googleapis.com/v0/b/yashnews-16aa6.appspot.com/o/yashnewslogo.jpg?alt=media&token=e108ea97-960c-4b2a-a58d-7534ec7bb28b"
+            "https://firebasestorage.googleapis.com/v0/b/yashnews-16aa6.appspot.com/o/yashnewslogo.jpg?alt=media&token=e108ea97-960c-4b2a-a58d-7534ec7bb28b"
         private val urlProfileImg =
-                "https://firebasestorage.googleapis.com/v0/b/yashnews-16aa6.appspot.com/o/yashlogo.png?alt=media&token=bca5ae10-7d5a-4e5d-9967-75b305a632ba"
+            "https://firebasestorage.googleapis.com/v0/b/yashnews-16aa6.appspot.com/o/yashlogo.png?alt=media&token=bca5ae10-7d5a-4e5d-9967-75b305a632ba"
         // index to identify current nav menu item
         var navItemIndex = 0
 
@@ -535,10 +535,10 @@ fragmentTransaction.addToBackStack(CURRENT_TAG)
     }
 
     private fun doFragmentTransaction(
-            fragment: Fragment,
-            tag: String,
-            addToBackStack: Boolean,
-            message: String
+        fragment: Fragment,
+        tag: String,
+        addToBackStack: Boolean,
+        message: String
     ) {
         val transaction = supportFragmentManager.beginTransaction()
         if (message != "") {
@@ -556,10 +556,10 @@ fragmentTransaction.addToBackStack(CURRENT_TAG)
     }
 
     private fun doFragmentTransaction(
-            fragment: Fragment,
-            tag: String,
-            addToBackStack: Boolean,
-            item: Bundle
+        fragment: Fragment,
+        tag: String,
+        addToBackStack: Boolean,
+        item: Bundle
     ) {
         val transaction = supportFragmentManager.beginTransaction()
 
@@ -580,8 +580,8 @@ fragmentTransaction.addToBackStack(CURRENT_TAG)
         val fragment = HomeFragment()
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.setCustomAnimations(
-                android.R.anim.fade_in,
-                android.R.anim.fade_out
+            android.R.anim.fade_in,
+            android.R.anim.fade_out
         )
         fragmentTransaction.replace(R.id.frame, fragment)
         fragmentTransaction.commitAllowingStateLoss()
@@ -592,9 +592,9 @@ fragmentTransaction.addToBackStack(CURRENT_TAG)
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND
         sendIntent.putExtra(
-                Intent.EXTRA_TEXT,
+            Intent.EXTRA_TEXT,
 
-                "Download ${getString(R.string.app_name)} App Today!!!\n  https://play.google.com/store/apps/details?id=$appPackageName"
+            "Download ${getString(R.string.app_name)} App Today!!!\n  https://play.google.com/store/apps/details?id=$appPackageName"
         )
         sendIntent.type = "text/plain"
         startActivity(sendIntent)
@@ -606,16 +606,16 @@ fragmentTransaction.addToBackStack(CURRENT_TAG)
         Log.d(TAG, "Checking for updates")
         appUpdateInfoTask?.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
                 appUpdateManager?.startUpdateFlowForResult(
-                        // Pass the intent that is returned by 'getAppUpdateInfo()'.
-                        appUpdateInfo,
-                        // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
-                        AppUpdateType.IMMEDIATE,
-                        // The current activity making the update request.
-                        this,
-                        // Include a request code to later monitor this update request.
-                        MY_REQUEST_CODE)
+                    // Pass the intent that is returned by 'getAppUpdateInfo()'.
+                    appUpdateInfo,
+                    // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
+                    AppUpdateType.IMMEDIATE,
+                    // The current activity making the update request.
+                    this,
+                    // Include a request code to later monitor this update request.
+                    MY_REQUEST_CODE)
                 appUpdateManager?.registerListener(listener)
 
                 // Request the update.
@@ -635,22 +635,22 @@ fragmentTransaction.addToBackStack(CURRENT_TAG)
 
         appUpdateManager?.appUpdateInfo?.addOnSuccessListener { appUpdateInfo ->
 
-                    if (appUpdateInfo.updateAvailability()
-                            == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS
-                    ) {
-                        // If an in-app update is already running, resume the update.
-                        appUpdateManager?.startUpdateFlowForResult(
-                                appUpdateInfo,
-                                IMMEDIATE,
-                                this,
-                                MY_REQUEST_CODE
-                        );
-                    }
-                }
+            if (appUpdateInfo.updateAvailability()
+                == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS
+            ) {
+                // If an in-app update is already running, resume the update.
+                appUpdateManager?.startUpdateFlowForResult(
+                    appUpdateInfo,
+                    IMMEDIATE,
+                    this,
+                    MY_REQUEST_CODE
+                );
+            }
+        }
     }
-  override  fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-      super.onActivityResult(requestCode, resultCode, data)
-      // super.onActivityResult(requestCode, resultCode, data)
+    override  fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        // super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == MY_REQUEST_CODE) {
             when (resultCode) {
                 Activity.RESULT_OK -> {

@@ -1,8 +1,5 @@
 package gauravdahale.gtech.akoladirectory.activity
 
-//import com.google.android.gms.ads.AdRequest
-//import com.google.android.gms.ads.MobileAds
-
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -33,9 +30,9 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import gauravdahale.gtech.akoladirectory.R
+import gauravdahale.gtech.akoladirectory.databinding.RecordActivityDarkBinding
 import gauravdahale.gtech.akoladirectory.models.CallModel
 import gauravdahale.gtech.akoladirectory.models.ContactModel
-import kotlinx.android.synthetic.main.new_record_activity.*
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.text.DateFormat
@@ -59,9 +56,9 @@ class RecordActivity : AppCompatActivity(), BaseSliderView.OnSliderClickListener
     internal var imageurl2: String? = null
     internal var imageurl3: String? = null
     internal var imageurl4: String? = null
-    lateinit internal var database: FirebaseDatabase
-    lateinit internal var auth: FirebaseAuth
-    lateinit internal var user: String
+    internal lateinit var database: FirebaseDatabase
+    internal lateinit var auth: FirebaseAuth
+    internal lateinit var user: String
     internal var storedphone: String? = null
     internal var n: String? = null
     internal var a: String? = null
@@ -75,102 +72,92 @@ class RecordActivity : AppCompatActivity(), BaseSliderView.OnSliderClickListener
     lateinit internal var callbutton: Button
     internal var marquee: TextView? = null
     lateinit var model: ContactModel
+    private lateinit var binding: RecordActivityDarkBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Set up full-screen UI
         val decorView = window.decorView
         val uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
         decorView.systemUiVisibility = uiOptions
         actionBar?.hide()
-        setContentView(R.layout.record_activity_dark)
-        val mSettings = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
-        val place = mSettings.getString("PLACE", "")
-        Log.d("placeselected", "$place")
+
+        // Initialize View Binding
+        binding = RecordActivityDarkBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Initialize Firebase
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
-        val i = intent
-        model = i.getSerializableExtra("parcel") as ContactModel
+        model = intent.getSerializableExtra("parcel") as ContactModel
 
         registerShopEvent()
 
+        val mSettings = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
+        val place = mSettings.getString("PLACE", "")
+        Log.d("placeselected", "$place")
+
         try {
             val ref = "${model.city}/${model.ref}"
-            databaseReference = database.getReference(ref) } catch (e: KotlinNullPointerException) { Log.e("Reference", e.message.toString()) }
-
-        val titletextview = findViewById<TextView>(R.id.shoptitlerecord) as TextView
-        addresstextview = findViewById<View>(R.id.recordaddress) as TextView
-        callbutton = findViewById(R.id.callbtnrecord)
-        sliderLayout = findViewById<View>(R.id.imagerecord) as SliderLayout
-        descriptionview = findViewById<View>(R.id.services) as TextView
-        //val owner = findViewById<View>(R.id.ownertxtview) as TextView
-        val timings = findViewById<View>(R.id.recordtiming) as TextView
-        val counter = findViewById<View>(R.id.counter) as TextView
-
-        user = auth.currentUser!!.uid.toString()
-
-        //  databaseReference = database.getReference(ref)
-
-        storedphone = mSettings.getString("USER_NUMBER", "")
-        val storedname = mSettings.getString("USER_NAME", "")
-
-
-        try {
-            titletextview.text = model.n
-            phonetext.text = model.p
-            timings.text = model.t
-            addresstextview!!.text = model.a
-            //     owner.text = model.o
-            counter.text = model.c
-            ratingBar.rating = model.rating!!.toFloat()
-            ownertxtview.text = model.o
-
-            rating.text ="${model.rating}/${model.totalreviews} user reviews "
-            imageurl1 = model.i
-            imageurl2 = model.ii
-            imageurl3 = model.iii
-            imageurl4 = model.iiii
-        } catch (e: NullPointerException) {
+            databaseReference = database.getReference(ref)
+        } catch (e: KotlinNullPointerException) {
+            Log.e("Reference", e.message.toString())
         }
 
-        try {
+        // Bind views using View Binding
+        binding.shoptitlerecord.text = model.n
+        binding.recordaddress.text = model.a
+        binding.callbtnrecord.setOnClickListener { handleCall() }
+        binding.recordtiming.text = model.t
+        binding.counter.text = model.c
+        binding.ratingBar.rating = model.rating!!.toFloat()
+        binding.ownertxtview.text = model.o
+        binding.rating.text = "${model.rating}/${model.totalreviews} user reviews"
 
-            model.d.let { descriptionview!!.text = HtmlCompat.fromHtml(it!!, HtmlCompat.FROM_HTML_MODE_LEGACY) }
-        } catch (e: NullPointerException) {
-            descriptionview!!.text = d
+        // Description handling
+        model.d?.let {
+            binding.services.text = HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        } ?: run {
+            binding.services.text = d
         }
-      if(!imageurl1.isNullOrEmpty())  setslider(imageurl1, imageurl2, imageurl3, imageurl4)
-        if (imageurl2 == null) {setslider()}
+
+        // Set slider if images exist
+        if (!model.i.isNullOrEmpty()) {
+            setslider(model.i, model.ii, model.iii, model.iiii)
+        }
+
+        // Log call analytics
+        mAnalytics = FirebaseAnalytics.getInstance(this)
+    }
+
+    private fun handleCall() {
         val phone = model.p
-        callbutton.setOnClickListener {
-            val SEPARATOR = " "
-            val n1: String
-            val n2: String
-            mAnalytics = FirebaseAnalytics.getInstance(this@RecordActivity)
-            val mSettings = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
-            val storedname = mSettings.getString("USER_NAME", "")
-            val storedphone = mSettings.getString("USER_NUMBER", "")
-            val bundle = Bundle()
-            bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, model.n)
-            bundle.putString(FirebaseAnalytics.Param.CHARACTER, storedname)
-            bundle.putString(FirebaseAnalytics.Param.ACHIEVEMENT_ID, storedphone)
-            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, storedname)
-            mAnalytics?.logEvent("Call", bundle)
-val date:String? =DateFormat.getDateTimeInstance().format(Calendar.getInstance().time)
-            //Toast.makeText(getApplicationContext(),"Tap again to dial",Toast.LENGTH_LONG).show();
-            logcall(model.n!!, storedname, storedphone, date)
+        val SEPARATOR = " "
+        val mSettings = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
+        val storedname = mSettings.getString("USER_NAME", "")
+        val storedphone = mSettings.getString("USER_NUMBER", "")
 
-            if (phone!!.contains(SEPARATOR)) {
-                val parts = phone.split(SEPARATOR.toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+        val bundle = Bundle().apply {
+            putString(FirebaseAnalytics.Param.ITEM_NAME, model.n)
+            putString(FirebaseAnalytics.Param.CHARACTER, storedname)
+            putString(FirebaseAnalytics.Param.ACHIEVEMENT_ID, storedphone)
+        }
+        mAnalytics?.logEvent("Call", bundle)
 
-                n1 = parts[0]
-                n2 = parts[1]
-                callClick(n1, n2)
-            } else {
-                val uri = "tel:$phone"
-                val intent = Intent(Intent.ACTION_DIAL)
-                intent.data = Uri.parse(uri)
-                startActivity(intent)
+        val date: String? = DateFormat.getDateTimeInstance().format(Calendar.getInstance().time)
+        logcall(model.n!!, storedname, storedphone, date)
+
+        if (phone!!.contains(SEPARATOR)) {
+            val parts = phone.split(SEPARATOR).filter { it.isNotEmpty() }
+            if (parts.size == 2) {
+                callClick(parts[0], parts[1])
             }
+        } else {
+            val uri = "tel:$phone"
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse(uri)
+            startActivity(intent)
         }
     }
 
@@ -188,6 +175,7 @@ val date:String? =DateFormat.getDateTimeInstance().format(Calendar.getInstance()
 
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         super.onBackPressed()
     }
@@ -243,7 +231,7 @@ val date:String? =DateFormat.getDateTimeInstance().format(Calendar.getInstance()
                 databaseReference?.parent?.parent?.child("Ratings")?.child(model.n!!)?.child(user)?.child("review")?.setValue(ratingBar.rating)
                 databaseReference?.parent?.parent?.child("Ratings")?.child(model.n!!)?.child(user)?.child("comment")?.setValue(commentbox.editText?.text.toString())
                 databaseReference?.child("Ratings")?.child(user)?.child("review")?.setValue(ratingBar.rating)
-                logreview(RecordActivity@ this, model.n!!, rating.toString(), user)
+                logreview(this, model.n!!, rating.toString(), user)
             } catch (e: java.lang.Exception) {
                 Log.e("Reference", e.message.toString())
             }
@@ -399,11 +387,13 @@ sliderLayout!!.stopAutoCycle()
 
         }
 
+        @Deprecated("Deprecated in Java")
         override fun onPreExecute() {
             super.onPreExecute()
 
         }
 
+        @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg uris: Uri): ByteArray? {
             if (mBitmap == null) {
                 try {

@@ -52,6 +52,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include
+        android:id="@+id/content_sub"
         layout="@layout/content_sub"
         tools:ignore="ResourceCycle" />
 

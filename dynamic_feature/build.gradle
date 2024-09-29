@@ -1,15 +1,12 @@
 apply plugin: 'com.android.dynamic-feature'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 34
     
 
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 84
-        versionName "84"
 
 
     }
@@ -18,32 +15,28 @@ android {
     productFlavors {
         akola{
             dimension "directory"
-            applicationId "com.gtech.akoladirectory"
 
         }
         buldhana{
             dimension "directory"
-            applicationId "com.gtech.buldhanadirectory"
         }
         jalgaon{
             dimension "directory"
 
-            applicationId "gauravdahale.gtech.jalgaondirectory"
         }
         nashik{
             dimension "directory"
 
-            applicationId "gauravdahale.gtech.nashikdirectory"
         }
         amravati{
             dimension "directory"
 
-            applicationId "gauravdahale.gtech.amravatidirectory"
         }
     }
     buildTypes.each {
         it.buildConfigField 'String', 'Firebaseseckey', Firebasekey
     }
+    namespace 'gauravdahale.gtech.dynamic_feature'
 
 }
 

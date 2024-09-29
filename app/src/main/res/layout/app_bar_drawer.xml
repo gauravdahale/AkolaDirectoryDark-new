@@ -62,7 +62,9 @@ android:layout_alignParentTop="true"
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_drawer" />
+    <include
+        android:id="@+id/content_drawer"
+        layout="@layout/content_drawer" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

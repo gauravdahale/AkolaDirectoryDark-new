@@ -233,6 +233,7 @@ class MainActivityTabVersion : AppCompatActivity {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         val builder = AlertDialog.Builder(this@MainActivityTabVersion)
         builder.setTitle("Please Share")

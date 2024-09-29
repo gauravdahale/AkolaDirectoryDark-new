@@ -29,13 +29,13 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.*
 import gauravdahale.gtech.akoladirectory.R
 import gauravdahale.gtech.akoladirectory.adapter.ShopListAdapter
+import gauravdahale.gtech.akoladirectory.databinding.CattoolbarBinding
+import gauravdahale.gtech.akoladirectory.databinding.RecordActivityDarkBinding
 import gauravdahale.gtech.akoladirectory.livedata.ShopListLiveData
 import gauravdahale.gtech.akoladirectory.models.CallModel
 import gauravdahale.gtech.akoladirectory.models.ContactModel
 import gauravdahale.gtech.akoladirectory.viewmodels.ShopListViewModel
 import gauravdahale.gtech.akoladirectory.viewmodels.ShopListViewModelFactory
-import kotlinx.android.synthetic.main.cattoolbar.view.*
-import kotlinx.android.synthetic.main.content_sub.*
 
 
 class ShopListActivity : AppCompatActivity() {
@@ -55,7 +55,7 @@ class ShopListActivity : AppCompatActivity() {
     internal var datalist = ArrayList<ContactModel>()
     var counter = 0
     //Facebook Callback
-
+    private lateinit var binding: CattoolbarBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,9 +68,9 @@ class ShopListActivity : AppCompatActivity() {
         val City = intent.getStringExtra("Place")
         val prefs = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
         val Place = prefs.getString("PLACE", "")
-        mAnalytics = FirebaseAnalytics.getInstance(ShopListActivity@ this)
-        toolbar.catoolbartext.text = titlebar
-        toolbar.placeselected.text = "($Place)"
+        mAnalytics = FirebaseAnalytics.getInstance(this)
+        toolbar.findViewById<TextView>(R.id.catoolbartext).text = titlebar
+        toolbar.findViewById<TextView>(R.id.placeselected).text = "($Place)"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         /* Code to change the back drawable color */
         toolbar.navigationIcon?.setColorFilter(resources.getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
@@ -136,7 +136,7 @@ class ShopListActivity : AppCompatActivity() {
 
       liveData.observe(this, Observer {
           adapter.submitList(it)
-          emptylistview.hide()
+          binding.contentSub .emptylistview.hide()
           empty.visibility = View.GONE
       })
         //---------------------
@@ -184,6 +184,7 @@ class ShopListActivity : AppCompatActivity() {
 
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         super.onBackPressed()
     }

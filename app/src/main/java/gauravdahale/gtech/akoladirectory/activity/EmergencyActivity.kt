@@ -24,104 +24,90 @@ import com.google.firebase.database.FirebaseDatabase
 import gauravdahale.gtech.akoladirectory.ItemClickListener
 import gauravdahale.gtech.akoladirectory.models.ContactModel
 import gauravdahale.gtech.akoladirectory.R
-import kotlinx.android.synthetic.main.activity_emergency.*
-import kotlinx.android.synthetic.main.emergency_toolbar.view.*
+
+import com.google.android.material.appbar.MaterialToolbar
+import gauravdahale.gtech.akoladirectory.databinding.ActivityEmergencyBinding
 
 class EmergencyActivity : AppCompatActivity() {
-    internal var database = FirebaseDatabase.getInstance()
-    private val fab: FloatingActionButton? = null
-    internal var mDatabaseReference = this.database.reference
-    private var mRecyclerView: RecyclerView? = null
-    private var linearLayoutManager: LinearLayoutManager? = null
-    lateinit var adapter: FirebaseRecyclerAdapter<*, *>
-    lateinit var shrinkAnim: ScaleAnimation
-    private var tvNoMovies: RelativeLayout? = null
-    internal var ctx: Context? = null
-lateinit var mAnalytics: FirebaseAnalytics
+    private lateinit var binding: ActivityEmergencyBinding
+    private val database = FirebaseDatabase.getInstance()
+    private var mDatabaseReference = database.reference
+    private lateinit var adapter: FirebaseRecyclerAdapter<ContactModel, EmergencyActivity.ItemViewHolder>
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var shrinkAnim: ScaleAnimation
+    private lateinit var mAnalytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.emergency_toolbar)
+        binding = ActivityEmergencyBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val prefs = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
-        val place = prefs.getString("PLACE", "")
-        //-------------------------Admob--------------------------------------------------------------------
-        //val ADMOBID="ca-app-pub-4353073709762339~9362988006"
+        setupToolbar()
+        initializeAnalytics()
+        setupRecyclerView()
 
-//        MobileAds.initialize(this, ADMOBID)
-//        val adRequest = AdRequest.Builder().build()
-//        adView.loadAd(adRequest)
+        val title = intent.getStringExtra("Title") ?: ""
+        val place = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE).getString("PLACE", "")
+        loadEmergencyData(place, title)
+    }
 
-///-------------------------------------------------------------------------------------------------
-
-        val toolbar = findViewById<View>(R.id.emertoolbar) as Toolbar
+    private fun setupToolbar() {
+//        val toolbar: MaterialToolbar = binding.emertoolbar
+        val toolbar: MaterialToolbar = findViewById(R.id.emertoolbar)
         setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        mRecyclerView = findViewById<View>(R.id.emergency_recyclerview) as RecyclerView
-        tvNoMovies = findViewById<RelativeLayout>(R.id.eemptylistview) as RelativeLayout
-        shrinkAnim = ScaleAnimation(1.15f, 0.0f, 1.15f, 0.0f, 1, 0.5f, 1, 0.5f)
-        if (mRecyclerView != null) {
-            mRecyclerView!!.setHasFixedSize(true)
-        }
-        linearLayoutManager = LinearLayoutManager(applicationContext)
-        mRecyclerView!!.layoutManager = this.linearLayoutManager
-        val title = intent.getStringExtra("Title")
-        val titlebar = intent.getStringExtra("Settitle")
-        Toast.makeText(EmergencyActivity@ this, "Title : $place", Toast.LENGTH_SHORT).show()
-        toolbar.emeregnecytitle.text=titlebar
-        toolbar.navigationIcon?.setColorFilter(resources.   getColor(R.color.colorPrimaryDark)
-                , PorterDuff.Mode.SRC_ATOP);
-        //logeveny
-       mAnalytics= FirebaseAnalytics.getInstance(applicationContext)
-        val mSettings = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
-        val storedname = mSettings.getString("USER_NAME", "")
-        val storedphone = mSettings.getString("USER_NUMBER", "")
-        val bundle = Bundle()
-        bundle.putString("Category", title)
-        bundle.putString(FirebaseAnalytics.Param.CHARACTER, storedname)
-        bundle.putString(FirebaseAnalytics.Param.ACHIEVEMENT_ID, storedphone)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
 
-        bundle.putString("City", place)
+    private fun initializeAnalytics() {
+        mAnalytics = FirebaseAnalytics.getInstance(applicationContext)
+        val prefs = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
+        val storedName = prefs.getString("USER_NAME", "")
+        val storedPhone = prefs.getString("USER_NUMBER", "")
+        val place = prefs.getString("PLACE", "")
+
+        val bundle = Bundle().apply {
+            putString("Category", intent.getStringExtra("Title"))
+            putString(FirebaseAnalytics.Param.CHARACTER, storedName)
+            putString(FirebaseAnalytics.Param.ACHIEVEMENT_ID, storedPhone)
+            putString("City", place)
+        }
+
         mAnalytics.logEvent("EmergencyCategory", bundle)
-        val query = place?.let {
-            FirebaseDatabase.getInstance()
-                .reference.child(it)
-                .child(title!!)
-        }
+    }
 
+    private fun setupRecyclerView() {
+        linearLayoutManager = LinearLayoutManager(this)
+        binding.emergencyRecyclerview.layoutManager = linearLayoutManager
+        binding.eemptylistview.visibility = View.GONE
+    }
+
+    private fun loadEmergencyData(place: String?, title: String) {
+        val query = place?.let { database.reference.child(it).child(title) }
 
         val options = query?.let {
             FirebaseRecyclerOptions.Builder<ContactModel>()
                 .setQuery(it, ContactModel::class.java)
                 .build()
-
         }
 
-        adapter = object : FirebaseRecyclerAdapter<ContactModel, EmergencyActivity.ItemViewHolder>(options!!) {
-
-
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmergencyActivity.ItemViewHolder {
+        adapter = object : FirebaseRecyclerAdapter<ContactModel, ItemViewHolder>(options!!) {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
                 val view = LayoutInflater.from(parent.context)
-                        .inflate(R.layout.emergencycardview, parent, false)
-                if (this@EmergencyActivity.tvNoMovies!!.visibility == View.VISIBLE) {
-                    this@EmergencyActivity.tvNoMovies!!.visibility = View.GONE
-
-                }
+                    .inflate(R.layout.emergencycardview, parent, false)
                 return ItemViewHolder(view)
             }
 
-
             override fun onBindViewHolder(viewHolder: ItemViewHolder, position: Int, items: ContactModel) {
-
-
                 viewHolder.Name.text = items.n
                 viewHolder.Address.text = items.p
+
+//                if (items!=null == View.VISIBLE) {
+                    binding.eemptylistview.visibility = View.GONE
+//                }
             }
         }
-        //Full screen ads
 
-
-        this.mRecyclerView!!.adapter = adapter
+        binding.emergencyRecyclerview.adapter = adapter
     }
 
     override fun onStart() {
@@ -129,42 +115,24 @@ lateinit var mAnalytics: FirebaseAnalytics
         adapter.startListening()
     }
 
-
     override fun onStop() {
         super.onStop()
         adapter.stopListening()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()
-                return true
+                true
             }
+            else -> super.onOptionsItemSelected(item)
         }
-
-        return super.onOptionsItemSelected(item)
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
+    class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val Name: TextView = view.findViewById(R.id.emergencytitle)
+        val Address: TextView = view.findViewById(R.id.emergencynumber)
     }
-    class ItemViewHolder(v: View) : ViewHolder(v) {
-        internal var itemClickListener: ItemClickListener? = null
-        internal var Image: ImageView? = null
-        internal var Name: TextView
-        internal var Address: TextView
-        internal var Phone: TextView? = null
-        internal var Description: TextView? = null
-        internal var mview: View? = null
-
-        init {
-            this.Name = v.findViewById<View>(R.id.emergencytitle) as TextView
-            this.Address = v.findViewById<View>(R.id.emergencynumber) as TextView
-
-
-        }
-
-    }
-
 }
+
