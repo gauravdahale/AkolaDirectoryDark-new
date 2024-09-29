@@ -25,7 +25,7 @@ public class PhoneAuth extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
     private static final String TAG = "PHONEAUTH";
-private FirebaseAuth auth;
+    private FirebaseAuth auth;
     private TextInputEditText editTextMobile, editusername, edituseroccupation, editusercity;
     private DatabaseReference mDatabaseReference;
 
@@ -43,7 +43,7 @@ private FirebaseAuth auth;
         auth = FirebaseAuth.getInstance();
 
 
-       // finish();
+        // finish();
 
 
 
@@ -66,12 +66,12 @@ private FirebaseAuth auth;
                     return;
                 }
                 else
-                    if (username.isEmpty()) {
-                        editusername.setError("Enter Your Name");
-                        editusername.requestFocus();
-                        return;
-                    }
-                 else
+                if (username.isEmpty()) {
+                    editusername.setError("Enter Your Name");
+                    editusername.requestFocus();
+                    return;
+                }
+                else
                 if (useroccupation.isEmpty()) {
                     edituseroccupation.setError("Enter Your Occupation");
                     edituseroccupation.requestFocus();
@@ -91,7 +91,7 @@ private FirebaseAuth auth;
                 intent.putExtra("usercity", usercity);
 
                 startActivity(intent);
-      // finish();
+                // finish();
             }
         });
 
