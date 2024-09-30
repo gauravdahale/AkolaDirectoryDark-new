@@ -42,13 +42,12 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
-import com.google.firebase.Firebase
+//import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
-import com.google.firebase.appcheck.appCheck
-import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
+//import com.google.firebase.appcheck.appCheck
+//import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.initialize
 import com.squareup.picasso.Picasso
 import gauravdahale.gtech.akoladirectory.ChangeFragment
 import gauravdahale.gtech.akoladirectory.models.ContactModel
@@ -103,10 +102,10 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Firebase.initialize(context = this)
-        Firebase.appCheck.installAppCheckProviderFactory(
-            PlayIntegrityAppCheckProviderFactory.getInstance(),
-        )
+//        Firebase.initialize(context = this)
+//        Firebase.appCheck.installAppCheckProviderFactory(
+//            PlayIntegrityAppCheckProviderFactory.getInstance(),
+//        )
 
         appUpdateManager == AppUpdateManagerFactory.create(this)
         setContentView(R.layout.activity_drawer)

@@ -36,6 +36,6 @@ public class PromoActivity extends AppCompatActivity {
         super.onBackPressed();
         Intent intent = new Intent(getApplicationContext(),MainActivityTabVersion.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-        App.getContext().startActivity(intent);
+//        App.getContext().startActivity(intent);
     }
 }
