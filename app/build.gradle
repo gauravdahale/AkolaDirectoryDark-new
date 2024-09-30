@@ -6,7 +6,9 @@ apply plugin: 'com.google.firebase.crashlytics'
 
 
 android {
-
+    buildFeatures {
+        buildConfig true
+    }
     buildFeatures {
         viewBinding true
     }
@@ -42,7 +44,7 @@ android {
         minSdk 23
         vectorDrawables.useSupportLibrary = true
         targetSdk 34
-        versionCode 103
+        versionCode 104
 //        buildToolsVersion "29.0.2"
         versionName "100"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -140,8 +142,11 @@ android {
 //        targetCompatibility = 1.8
 //    }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+
+        // Enable desugaring for Java 8+ features
+//        coreLibraryDesugaringEnabled true
     }
     namespace 'gauravdahale.gtech.akoladirectory'
 
