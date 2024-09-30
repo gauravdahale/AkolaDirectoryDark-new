@@ -42,8 +42,13 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
+import com.google.firebase.Firebase
+import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.appCheck
+import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.initialize
 import com.squareup.picasso.Picasso
 import gauravdahale.gtech.akoladirectory.ChangeFragment
 import gauravdahale.gtech.akoladirectory.models.ContactModel
@@ -89,17 +94,23 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     private var mBottomSheetDialog: BottomSheetDialog? = null
     lateinit var dialog: Dialog
     val TAG = "Drawer Activity"
+
     ///-------------------------------------------------------------------------------------------------
-    private  var appUpdateManager: AppUpdateManager?=null
-    val MY_REQUEST_CODE=200
-    private  lateinit var listener: InstallStateUpdatedListener
-    private  lateinit var   drawer_layout: DrawerLayout
+    private var appUpdateManager: AppUpdateManager? = null
+    val MY_REQUEST_CODE = 200
+    private lateinit var listener: InstallStateUpdatedListener
+    private lateinit var drawer_layout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Firebase.initialize(context = this)
+        Firebase.appCheck.installAppCheckProviderFactory(
+            PlayIntegrityAppCheckProviderFactory.getInstance(),
+        )
+
         appUpdateManager == AppUpdateManagerFactory.create(this)
         setContentView(R.layout.activity_drawer)
-drawer_layout = findViewById(R.id.drawer_layout)
+        drawer_layout = findViewById(R.id.drawer_layout)
         val toolbarmain = findViewById<Toolbar>(R.id.toolbarmain)
 // Creates instance of the manager.
 
@@ -136,7 +147,7 @@ drawer_layout = findViewById(R.id.drawer_layout)
         val bottom_sheet = findViewById<View>(R.id.bottom_sheet)
         mBehavior = BottomSheetBehavior.from<View>(bottom_sheet)
 //------------------------------------------PLACE SELECTOR------------------------------------------
-     findViewById<ImageView>(R.id.home_bar_location).setOnClickListener {
+        findViewById<ImageView>(R.id.home_bar_location).setOnClickListener {
             placeDialog()
 
 
@@ -167,7 +178,7 @@ drawer_layout = findViewById(R.id.drawer_layout)
         };
         toggle.syncState()
 
-     findViewById<NavigationView>(R.id.nav_view).setNavigationItemSelectedListener(this)
+        findViewById<NavigationView>(R.id.nav_view).setNavigationItemSelectedListener(this)
         setupmainslider()
 
         if (savedInstanceState == null) {
@@ -280,8 +291,10 @@ drawer_layout = findViewById(R.id.drawer_layout)
         mBottomSheetDialog = BottomSheetDialog(this)
         mBottomSheetDialog?.setContentView(view)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mBottomSheetDialog?.window!!.addFlags(WindowManager.LayoutParams
-                .FLAG_TRANSLUCENT_STATUS)
+            mBottomSheetDialog?.window!!.addFlags(
+                WindowManager.LayoutParams
+                    .FLAG_TRANSLUCENT_STATUS
+            )
         }
 
         // set background transparent
@@ -387,6 +400,7 @@ drawer_layout = findViewById(R.id.drawer_layout)
                 CURRENT_TAG = TAG_HOME
                 loadfragment(HomeFragment())
             }
+
             R.id.nav_homeservices -> {
                 navItemIndex = 1
                 CURRENT_TAG = TAG_HOME_SERVICES
@@ -400,6 +414,7 @@ drawer_layout = findViewById(R.id.drawer_layout)
                 navItemIndex = 2
                 loadfragment(ShoppingFragment())
             }
+
             R.id.nav_health -> {
                 CURRENT_TAG = TAG_HEALTH
                 navItemIndex = 3
@@ -411,11 +426,13 @@ drawer_layout = findViewById(R.id.drawer_layout)
                 navItemIndex = 4
                 loadfragment(HomeSolutionsFragment())
             }
+
             R.id.nav_services -> {
                 CURRENT_TAG = TAG_SERVICES
                 navItemIndex = 5
                 loadfragment(ServicesFragment())
             }
+
             R.id.nav_education -> {
                 navItemIndex = 6
                 loadfragment(EducationFragment())
@@ -431,20 +448,25 @@ drawer_layout = findViewById(R.id.drawer_layout)
                 navItemIndex = 8
                 loadfragment(AutomobilesFragment())
             }
+
             R.id.nav_contactus -> {
                 navItemIndex = 9
                 loadfragment(ContactUS(), "Contact Us")
             }
+
             R.id.nav_register -> {
                 startActivity(Intent(DrawerActivity@ this, NewRegisterActivity::class.java))
             }
+
             R.id.nav_profile -> {
                 Toast.makeText(DrawerActivity@ this, "Coming Soon!!!", Toast.LENGTH_SHORT).show()
             }
+
             R.id.nav_share -> {
                 navItemIndex = 12
                 shareApp(applicationContext)
             }
+
             R.id.nav_send -> {
 
                 val intent = Intent(Intent.ACTION_SEND)
@@ -475,9 +497,11 @@ drawer_layout = findViewById(R.id.drawer_layout)
                 2 -> {
                     return HomeServicesFragment()
                 }
+
                 3 -> {
                     return ConstructionFragment()
                 }
+
                 4 -> return HomeSolutionsFragment()
                 5, 6 -> return HomeFragment()
                 else -> return HomeFragment()
@@ -498,7 +522,8 @@ drawer_layout = findViewById(R.id.drawer_layout)
                 txtcity?.text = model?.userCity
 //                navHeader!!.editprofile.setPaintFlags(navHeader!!.editprofile.getPaintFlags() or Paint
 //                                .UNDERLINE_TEXT_FLAG)
-                Glide.with(this@DrawerActivity).load(model?.userOccupation).apply(RequestOptions().error(R.drawable.logo).circleCrop()).into(navimage)
+                Glide.with(this@DrawerActivity).load(model?.userOccupation)
+                    .apply(RequestOptions().error(R.drawable.logo).circleCrop()).into(navimage)
             }
 
             override fun onCancelled(p0: DatabaseError) {
@@ -515,6 +540,7 @@ drawer_layout = findViewById(R.id.drawer_layout)
             "https://firebasestorage.googleapis.com/v0/b/yashnews-16aa6.appspot.com/o/yashnewslogo.jpg?alt=media&token=e108ea97-960c-4b2a-a58d-7534ec7bb28b"
         private val urlProfileImg =
             "https://firebasestorage.googleapis.com/v0/b/yashnews-16aa6.appspot.com/o/yashlogo.png?alt=media&token=bca5ae10-7d5a-4e5d-9967-75b305a632ba"
+
         // index to identify current nav menu item
         var navItemIndex = 0
 
@@ -599,6 +625,7 @@ drawer_layout = findViewById(R.id.drawer_layout)
         sendIntent.type = "text/plain"
         startActivity(sendIntent)
     }
+
     private fun checkUpdate() {
         // Returns an intent object that you use to check for an update.
         val appUpdateInfoTask = appUpdateManager?.appUpdateInfo
@@ -606,7 +633,8 @@ drawer_layout = findViewById(R.id.drawer_layout)
         Log.d(TAG, "Checking for updates")
         appUpdateInfoTask?.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
+            ) {
                 appUpdateManager?.startUpdateFlowForResult(
                     // Pass the intent that is returned by 'getAppUpdateInfo()'.
                     appUpdateInfo,
@@ -615,7 +643,8 @@ drawer_layout = findViewById(R.id.drawer_layout)
                     // The current activity making the update request.
                     this,
                     // Include a request code to later monitor this update request.
-                    MY_REQUEST_CODE)
+                    MY_REQUEST_CODE
+                )
                 appUpdateManager?.registerListener(listener)
 
                 // Request the update.
@@ -648,7 +677,8 @@ drawer_layout = findViewById(R.id.drawer_layout)
             }
         }
     }
-    override  fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         // super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == MY_REQUEST_CODE) {
@@ -657,6 +687,7 @@ drawer_layout = findViewById(R.id.drawer_layout)
                     Log.d(TAG, "" + "Result Ok")
                     //  handle user's approval }
                 }
+
                 Activity.RESULT_CANCELED -> {
                     {
 //if you want to request the update again just call checkUpdate()
@@ -664,6 +695,7 @@ drawer_layout = findViewById(R.id.drawer_layout)
                     Log.d(TAG, "" + "Result Cancelled")
                     //  handle user's rejection  }
                 }
+
                 ActivityResult.RESULT_IN_APP_UPDATE_FAILED -> {
                     //if you want to request the update again just call checkUpdate()
                     Log.d(TAG, "" + "Update Failure")

@@ -1,10 +1,40 @@
 {
   "project_info": {
     "project_number": "884083362195",
+    "firebase_url": "https://buldhana-directory-default-rtdb.firebaseio.com",
     "project_id": "buldhana-directory",
     "storage_bucket": "buldhana-directory.appspot.com"
   },
   "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884083362195:android:1e35ed0ed6e0668b07c066",
+        "android_client_info": {
+          "package_name": "com.gtech.buldhanaadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "884083362195-337cvobv3kpjoet5utdeu6enl8stp618.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRL24U-VATWbMqANieaC3m7Y5pGaf6yjw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "884083362195-337cvobv3kpjoet5utdeu6enl8stp618.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:884083362195:android:8e1894a53446dc4207c066",
@@ -13,6 +43,51 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "884083362195-btj0sc68arbdflskt3ejtpdem35uq1qm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gtech.buldhanadirectory",
+            "certificate_hash": "5517f15a6e18c0e618b98c85e2807197374beee8"
+          }
+        },
+        {
+          "client_id": "884083362195-337cvobv3kpjoet5utdeu6enl8stp618.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRL24U-VATWbMqANieaC3m7Y5pGaf6yjw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "884083362195-337cvobv3kpjoet5utdeu6enl8stp618.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884083362195:android:0e16fa7750d7310307c066",
+        "android_client_info": {
+          "package_name": "com.gtech.buregistration"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "884083362195-1nnb36osfqfevpgkf1vtrn6ru7f9oscq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gtech.buregistration",
+            "certificate_hash": "e90a1c6abb11542f2d4d8b05865229aac91cebaf"
+          }
+        },
         {
           "client_id": "884083362195-337cvobv3kpjoet5utdeu6enl8stp618.apps.googleusercontent.com",
           "client_type": 3

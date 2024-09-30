@@ -31,6 +31,7 @@ import gauravdahale.gtech.akoladirectory.R
 import gauravdahale.gtech.akoladirectory.adapter.ShopListAdapter
 import gauravdahale.gtech.akoladirectory.databinding.CattoolbarBinding
 import gauravdahale.gtech.akoladirectory.databinding.RecordActivityDarkBinding
+import gauravdahale.gtech.akoladirectory.databinding.VerifyphoneBinding
 import gauravdahale.gtech.akoladirectory.livedata.ShopListLiveData
 import gauravdahale.gtech.akoladirectory.models.CallModel
 import gauravdahale.gtech.akoladirectory.models.ContactModel
@@ -59,6 +60,8 @@ class ShopListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = CattoolbarBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setContentView(R.layout.cattoolbar)
 //set toolbar and get intents
         val toolbar = findViewById<View>(R.id.toolbarnew) as Toolbar

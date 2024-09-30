@@ -1,185 +1,227 @@
 package gauravdahale.gtech.akoladirectory.activity
 
 import android.content.Context
-import android.content.Intent
+import android.widget.EditText
 import android.os.Bundle
+import android.content.Intent
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
+import org.json.JSONObject
+import org.json.JSONException
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.*
+import com.google.firebase.auth.PhoneAuthOptions
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import gauravdahale.gtech.akoladirectory.R
 import gauravdahale.gtech.akoladirectory.databinding.VerifyphoneBinding
 import gauravdahale.gtech.akoladirectory.models.UserModel
-import org.json.JSONException
-import org.json.JSONObject
 import java.text.DateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.math.log
 
 class VerifyPhoneActivity : AppCompatActivity() {
+
+    private companion object {
+        private const val TAG = "VerifyPhoneActivity"
+        private const val RESEND_TIMEOUT_SECONDS = 60
+    }
 
     private var name: String? = null
     private var occupation: String? = null
     private var city: String? = null
     private var mobile: String? = null
     private var token: String? = null
-    private var verificationId: String? = null
-    private var resendToken: PhoneAuthProvider.ForceResendingToken? = null
 
-    private val auth by lazy { FirebaseAuth.getInstance() }
-    private val databaseReference by lazy { FirebaseDatabase.getInstance().reference }
+    private var mVerificationId: String? = null
+    private lateinit var mDatabaseReference: DatabaseReference
     private lateinit var binding: VerifyphoneBinding
+    private lateinit var mAuth: FirebaseAuth
+    private var mResendToken: PhoneAuthProvider.ForceResendingToken? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Set up view binding
+        // Use View Binding
         binding = VerifyphoneBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Get user information from SharedPreferences
-        val settings = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
-        token = settings.getString("USER_TOKEN", "")
+        // Initialize other components
+        mAuth = FirebaseAuth.getInstance()
+        mDatabaseReference = FirebaseDatabase.getInstance().reference
 
-        // Get data from intent
-        intent?.let {
-            mobile = it.getStringExtra("mobile")
-            name = it.getStringExtra("username")
-            occupation = it.getStringExtra("useroccupation")
-            city = it.getStringExtra("usercity")
-        }
+        // Retrieve user data from previous activity
+        val intent = intent
+        name = intent.getStringExtra("username")
+        occupation = intent.getStringExtra("useroccupation")
+        city = intent.getStringExtra("usercity")
+        mobile = intent.getStringExtra("mobile")
 
+        // Display user's mobile number for confirmation
         Toast.makeText(this, "Mobile Number: $mobile", Toast.LENGTH_SHORT).show()
+
+        // Send verification code
         sendVerificationCode(mobile)
 
-        binding.resendbtn.setOnClickListener { resendVerificationCode() }
-        binding.buttonSignIn.setOnClickListener { verifyCode() }
+        // Resend verification code on button click
+        binding.resendbtn.setOnClickListener {
+            resendVerificationCode(mobile, mResendToken)
+        }
+
+        // Verify code entered manually on button click
+        binding.buttonSignIn.setOnClickListener {
+            val code = binding.editTextCode.text.toString().trim()
+            if (code.isEmpty() || code.length < 6) {
+                binding.editTextCode.error = "Enter valid code"
+                binding.editTextCode.requestFocus()
+                return@setOnClickListener
+            }
+            verifyVerificationCode(code)
+        }
     }
 
     private fun sendVerificationCode(mobile: String?) {
-        val options = PhoneAuthOptions.newBuilder(auth)
+        val options = PhoneAuthOptions.newBuilder(mAuth)
             .setPhoneNumber("+91$mobile")
-            .setTimeout(60L, TimeUnit.SECONDS)
+            .setTimeout(RESEND_TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS)
             .setActivity(this)
-            .setCallbacks(callbacks)
+            .setCallbacks(mCallbacks)
             .build()
+
         PhoneAuthProvider.verifyPhoneNumber(options)
+        Log.d(TAG, "sendVerificationCode:Called ")
     }
 
-    private fun resendVerificationCode() {
-        mobile?.let {
-            val options = PhoneAuthOptions.newBuilder(auth)
-                .setPhoneNumber("+91$it")
-                .setTimeout(60L, TimeUnit.SECONDS)
-                .setActivity(this)
-                .setCallbacks(callbacks)
-                .setForceResendingToken(resendToken!!)
-                .build()
+    private fun resendVerificationCode(mobile: String?, token: PhoneAuthProvider.ForceResendingToken?) {
+        val options = PhoneAuthOptions.newBuilder(mAuth)
+            .setPhoneNumber("+91$mobile")
+            .setTimeout(RESEND_TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS)
+            .setActivity(this)
+            .setCallbacks(mCallbacks)
+            .build()
+
+        if (token != null) {
+            Log.d(TAG, "resendVerificationCode: ")
+            PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                "+91$mobile", RESEND_TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS, this, mCallbacks, token
+            )
+        } else {
             PhoneAuthProvider.verifyPhoneNumber(options)
-            Toast.makeText(this, "OTP has been sent again", Toast.LENGTH_LONG).show()
         }
+
+        Toast.makeText(this, "OTP has been sent again to $mobile", Toast.LENGTH_LONG).show()
     }
 
-    private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+    private val mCallbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-            credential.smsCode?.let {
-                binding.editTextCode.setText(it)
-                verifyVerificationCode(it)
+            val code = credential.smsCode
+            if (code != null) {
+                binding.editTextCode.setText(code)
+                verifyVerificationCode(code)
+                Log.d(TAG, "onVerificationCompleted: ")
             }
         }
 
         override fun onVerificationFailed(e: FirebaseException) {
+            Toast.makeText(this@VerifyPhoneActivity, e.message, Toast.LENGTH_LONG).show()
             Log.w(TAG, "onVerificationFailed", e)
-            val message = when (e) {
-                is FirebaseAuthInvalidCredentialsException -> "Invalid request"
-                is FirebaseTooManyRequestsException -> "The SMS quota is reached"
-                else -> e.message
+
+            if (e is FirebaseAuthInvalidCredentialsException) {
+                // Invalid request
+            } else if (e is FirebaseTooManyRequestsException) {
+                val snackBar = Snackbar.make(binding.idVerifyPhone, "The SMS Quota is reached", Snackbar.LENGTH_SHORT)
+                snackBar.show()
             }
-            Snackbar.make(binding.root, message ?: "Verification failed", Snackbar.LENGTH_SHORT).show()
         }
 
-        override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
-            super.onCodeSent(verificationId, token)
-            this@VerifyPhoneActivity.verificationId = verificationId
-            resendToken = token
+        override fun onCodeSent(verificationId: String, forceResendingToken: PhoneAuthProvider.ForceResendingToken) {
+            super.onCodeSent(verificationId, forceResendingToken)
+            mVerificationId = verificationId
+            mResendToken = forceResendingToken
+            Log.d(TAG, "onCodeSent: ")
         }
-    }
-
-    private fun verifyCode() {
-        val code = binding.editTextCode.text.toString().trim()
-        if (code.isEmpty() || code.length < 6) {
-            binding.editTextCode.error = "Enter valid code"
-            binding.editTextCode.requestFocus()
-            return
-        }
-        verifyVerificationCode(code)
     }
 
     private fun verifyVerificationCode(code: String) {
         try {
-            val credential = PhoneAuthProvider.getCredential(verificationId!!, code)
+            val credential = PhoneAuthProvider.getCredential(mVerificationId!!, code)
             signInWithPhoneAuthCredential(credential)
+            Log.d(TAG, "verifyVerificationCode: ")
         } catch (e: Exception) {
-            Log.d(TAG, "verifyVerificationCode: ${e.localizedMessage}")
-            Snackbar.make(binding.root, e.localizedMessage ?: "Error occurred", Snackbar.LENGTH_SHORT).show()
-            finish()
+            val snackBar = Snackbar.make(binding.idVerifyPhone, e.localizedMessage, Snackbar.LENGTH_SHORT)
+            snackBar.show()
+            Log.d(TAG, "verifyVerificationCode" + e.localizedMessage)
         }
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
-        auth.signInWithCredential(credential).addOnCompleteListener(this) { task ->
-            if (task.isSuccessful) {
-                addUserToDatabase()
-                Snackbar.make(binding.root, "Login Successful", Snackbar.LENGTH_LONG).show()
-                Intent(this, DrawerActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    startActivity(this)
-                }
-                finish()
-            } else {
-                val message = if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                    "Invalid code entered..."
+        Log.d(TAG, "signInWithPhoneAuthCredential: ")
+        mAuth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // User Data Feeding to database.
+                    val tags = JSONObject()
+                    try {
+                        tags.put("Id", token)
+                        tags.put("Name", name)
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                    // OneSignal.sendTags(tags)
+                    val datetime = DateFormat.getDateTimeInstance().format(Calendar.getInstance().time)
+                    NewUser(name!!.trim(),
+                        occupation!!.trim(),
+                        mobile!!.trim(),
+                        city!!.trim(),
+                        token,
+                        datetime)
+                    val intent = Intent(this@VerifyPhoneActivity, DrawerActivity::class.java)
+                    val snackbar = Snackbar.make(binding.idVerifyPhone, "Login Successful", Snackbar.LENGTH_SHORT)
+                    snackbar.show()
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    startActivity(intent)
+                    finish()
                 } else {
-                    "Something went wrong, please try again later."
+                    var message = "Something is wrong, we will fix it soon..."
+                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                        message = "Invalid code entered..."
+                    }
+                    val snackbar = Snackbar.make(binding.idVerifyPhone, message, Snackbar.LENGTH_SHORT)
+                    snackbar.setAction("Dismiss") {}
+                    snackbar.show()
                 }
-                Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).setAction("Dismiss") {}.show()
             }
-        }
     }
 
-    private fun addUserToDatabase() {
-        val datetime = DateFormat.getDateTimeInstance().format(Calendar.getInstance().time)
-        val user = UserModel().apply {
-            userName = name?.trim() ?: ""
-            userOccupation = occupation?.trim() ?: ""
-            userNumber = mobile?.trim() ?: ""
-            userCity = city?.trim() ?: ""
-            date = datetime
-            token = this@VerifyPhoneActivity.token
-        }
+    private fun NewUser(newuserName: String, newuserOccupation: String, newuserNumber: String, newuserCity: String, newtoken: String?, newdatetime: String) {
+        val user = UserModel()
+        user.userName = newuserName
+        user.userOccupation = newuserOccupation
+        user.userNumber = newuserNumber
+        user.userCity = newuserCity
+        user.date = newdatetime
+        user.token = newtoken
 
-        auth.currentUser?.uid?.let { uid ->
-            databaseReference.child("users").push().setValue(user)
-            databaseReference.child("USERS").child(uid).setValue(user)
-        }
+        mDatabaseReference!!.child("users").push().setValue(user)
+        mDatabaseReference!!.child("USERS").child(mAuth!!.currentUser!!.uid).setValue(user)
+        val mAnalytics = FirebaseAnalytics.getInstance(this)
+        val bundle = Bundle()
+        bundle.putString("NewUser", newuserName)
+        mAnalytics.logEvent("NewUsers", bundle)
 
-        FirebaseAnalytics.getInstance(this).logEvent("NewUsers", Bundle().apply {
-            putString("NewUser", user.userName)
-        })
-
-        getSharedPreferences("USER_INFO", Context.MODE_PRIVATE).edit().apply {
-            putString("USER_NAME", user.userName)
-            putString("USER_NUMBER", user.userNumber)
-            apply()
-        }
-    }
-
-    companion object {
-        private const val TAG = "VerifyPhoneActivity"
+        val username = newuserName.trim()
+        val userphone = newuserNumber.trim()
+        val prefs = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
+        val editor = prefs.edit()
+        editor.putString("USER_NAME", username)
+        editor.putString("USER_NUMBER", userphone)
+        editor.apply()
     }
 }

@@ -181,7 +181,7 @@ class RecordActivity : AppCompatActivity(), BaseSliderView.OnSliderClickListener
     }
 
     override fun onStop() {
-        sliderLayout!!.stopAutoCycle()
+       binding. imagerecord!!.stopAutoCycle()
         super.onStop()
 
     }
@@ -276,6 +276,7 @@ class RecordActivity : AppCompatActivity(), BaseSliderView.OnSliderClickListener
     }
 
     fun setslider(imageurl1: String?, imageurl2: String?, imageurl3: String?, imageurl4: String?) {
+        sliderLayout = binding.imagerecord
         url1 = imageurl1
         url2 = imageurl2
         url3 = imageurl3

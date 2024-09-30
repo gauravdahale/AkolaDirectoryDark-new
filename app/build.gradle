@@ -36,13 +36,13 @@ android {
 //
 //        }
     }
-    compileSdkVersion 34
+    compileSdk  34
     defaultConfig {
         applicationId "com.gtech.akoladirectory"
-        minSdkVersion 21
+        minSdk 23
         vectorDrawables.useSupportLibrary = true
-        targetSdkVersion 34
-        versionCode 101
+        targetSdk 34
+        versionCode 102
 //        buildToolsVersion "29.0.2"
         versionName "100"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -134,7 +134,7 @@ android {
     }
 
 
-    dynamicFeatures = [":dynamic_feature"]
+//    dynamicFeatures = [":dynamic_feature"]
 //    compileOptions {
 //        sourceCompatibility = "1.8"
 //        targetCompatibility = 1.8
@@ -146,6 +146,7 @@ android {
     namespace 'gauravdahale.gtech.akoladirectory'
 
 }
+
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -191,6 +192,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 //    implementation 'club.cred.android:synth:1.0.0'
+    implementation 'com.google.android.play:integrity:1.4.0'
+    implementation 'com.google.firebase:firebase-appcheck-playintegrity:18.0.0'
 
 }
+
+
 
