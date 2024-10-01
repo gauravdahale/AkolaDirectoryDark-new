@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:403194184955:android:7a765825920df7e6bc9c5e",
+        "mobilesdk_app_id": "1:403194184955:android:daf26074e401623cbc9c5e",
         "android_client_info": {
-          "package_name": "com.gtech.akoladirectory"
+          "package_name": "com.example.flutterdirectory"
         }
       },
       "oauth_client": [
@@ -21,7 +21,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCTbrq4URWVk6bf6XALVvmom0zCfN7aW6U"
+          "current_key": "AIzaSyC4FbC3X3I0McKVQ1xjTs1c2rZjnEnkxWg"
         }
       ],
       "services": {
@@ -30,6 +30,193 @@
             {
               "client_id": "403194184955-20m78p2rv61rq90vrrvmje7ps2mgl11r.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "403194184955-73gq7u3sskpjegnuma14odb3va1uttid.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gtech.akoladirectory"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403194184955:android:7db1b02d6a88feb2bc9c5e",
+        "android_client_info": {
+          "package_name": "com.gtech.akolaadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403194184955-7erncp1vh0kbknbn0msgtm0ekj0be2ts.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gtech.akolaadmin",
+            "certificate_hash": "25a1985a7c5a1ae5d57acd62a552c5947197204d"
+          }
+        },
+        {
+          "client_id": "403194184955-d3umj0pgh9gfsc7e33kmc63p9hoea52p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gtech.akolaadmin",
+            "certificate_hash": "498c3a3f958dfc58ff16575f7e38c46f0a6c68c9"
+          }
+        },
+        {
+          "client_id": "403194184955-qb3cvp391te061uv6h4f6jgehnlsvjp8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gtech.akolaadmin",
+            "certificate_hash": "e90a1c6abb11542f2d4d8b05865229aac91cebaf"
+          }
+        },
+        {
+          "client_id": "403194184955-sv2c6mcm0s9t42s3aqla4qbr7d6g5ton.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gtech.akolaadmin",
+            "certificate_hash": "763986efac718c8ff631c5e985c5a50f1bcc87e0"
+          }
+        },
+        {
+          "client_id": "403194184955-20m78p2rv61rq90vrrvmje7ps2mgl11r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4FbC3X3I0McKVQ1xjTs1c2rZjnEnkxWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403194184955-20m78p2rv61rq90vrrvmje7ps2mgl11r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "403194184955-73gq7u3sskpjegnuma14odb3va1uttid.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gtech.akoladirectory"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403194184955:android:1f56bc68330e69b1bc9c5e",
+        "android_client_info": {
+          "package_name": "com.gtech.akolacrm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403194184955-pj4rnl83dpu6fqco8ifhd02okvu97shi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gtech.akolacrm",
+            "certificate_hash": "e90a1c6abb11542f2d4d8b05865229aac91cebaf"
+          }
+        },
+        {
+          "client_id": "403194184955-20m78p2rv61rq90vrrvmje7ps2mgl11r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4FbC3X3I0McKVQ1xjTs1c2rZjnEnkxWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403194184955-20m78p2rv61rq90vrrvmje7ps2mgl11r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "403194184955-73gq7u3sskpjegnuma14odb3va1uttid.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gtech.akoladirectory"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403194184955:android:7a765825920df7e6bc9c5e",
+        "android_client_info": {
+          "package_name": "com.gtech.akoladirectory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403194184955-8l7sp9d75j9p0f826kdjnne6b5o9o484.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gtech.akoladirectory",
+            "certificate_hash": "150a74bbe6d84dbc573cf489111924a263614abf"
+          }
+        },
+        {
+          "client_id": "403194184955-ehr7f5938m3ghg9q7mtbf16n28ag0vb4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gtech.akoladirectory",
+            "certificate_hash": "64613f535ed48a702826d2ab16a342d26932c538"
+          }
+        },
+        {
+          "client_id": "403194184955-mr7bf64bjr8v876akdto05laladeigqk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gtech.akoladirectory",
+            "certificate_hash": "763986efac718c8ff631c5e985c5a50f1bcc87e0"
+          }
+        },
+        {
+          "client_id": "403194184955-pg6qf7a2sdjvvevsq4ffret7ctm4thcd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gtech.akoladirectory",
+            "certificate_hash": "e90a1c6abb11542f2d4d8b05865229aac91cebaf"
+          }
+        },
+        {
+          "client_id": "403194184955-20m78p2rv61rq90vrrvmje7ps2mgl11r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4FbC3X3I0McKVQ1xjTs1c2rZjnEnkxWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403194184955-20m78p2rv61rq90vrrvmje7ps2mgl11r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "403194184955-73gq7u3sskpjegnuma14odb3va1uttid.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gtech.akoladirectory"
+              }
             }
           ]
         }

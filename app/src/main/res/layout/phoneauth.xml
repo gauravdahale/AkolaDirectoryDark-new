@@ -159,7 +159,8 @@
                 android:layout_gravity="end"
                 android:layout_margin="24dp"
                 android:layout_marginTop="15dp"
-                android:backgroundTint="@color/copper_text_color_30"
+                android:backgroundTint="@color/amber_500"
+                android:contentDescription="fab"
                 android:padding="20dp"
                 android:src="@drawable/ic_baseline_arrow_forward_ios_24"
                 app:tint="@android:color/white" />
