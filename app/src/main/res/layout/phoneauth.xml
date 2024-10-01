@@ -158,12 +158,12 @@
                 android:layout_height="@dimen/_40sdp"
                 android:layout_gravity="end"
                 android:layout_margin="24dp"
+
                 android:layout_marginTop="15dp"
-                android:backgroundTint="@color/amber_500"
-                android:contentDescription="fab"
+                android:backgroundTint="@color/amber_600"
                 android:padding="20dp"
                 android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                app:tint="@android:color/white" />
+                 />
         </LinearLayout>
         <ImageView
             android:layout_width="wrap_content"
