@@ -8,10 +8,12 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.telephony.SmsManager
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -22,6 +24,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -85,6 +88,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     }
 
+    val REQUEST_LOCATION_PERMISSION = 111
     private var mHandler: Handler? = null
     private var sliderHandler: Handler? = null
     private var navHeader: View? = null
@@ -96,6 +100,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     private var mBottomSheetDialog: BottomSheetDialog? = null
     lateinit var dialog: Dialog
     val TAG = "Drawer Activity"
+    private lateinit var sosButton: ImageView
 
     ///-------------------------------------------------------------------------------------------------
     private var appUpdateManager: AppUpdateManager? = null
@@ -115,6 +120,96 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         drawer_layout = findViewById(R.id.drawer_layout)
         val toolbarmain = findViewById<Toolbar>(R.id.toolbarmain)
 // Creates instance of the manager.
+        sosButton = findViewById(R.id.button_sos)
+
+        sosButton.setOnClickListener {
+            val prefs = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
+            val sosEnabled = prefs.getBoolean("sos", false)
+            val sosName = prefs.getString("sosName", "") ?: ""
+            val sosNumber = prefs.getString("sosNumber", "") ?: ""
+
+            Toast.makeText(
+                this@DrawerActivity,
+                "sfsdfds${sosEnabled && sosName.isNotEmpty() && sosNumber.isNotEmpty()}",
+                Toast.LENGTH_SHORT
+            ).show()
+            if (sosEnabled && sosName.isNotEmpty() && sosNumber.isNotEmpty()) {
+                // Get current GPS coordinates
+                val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                if (ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.SEND_SMS
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    // Request location permissions
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(
+                            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.SEND_SMS,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ),
+                        REQUEST_LOCATION_PERMISSION
+                    )
+                    return@setOnClickListener
+                }
+                val lastKnownLocation =
+                    locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                if (lastKnownLocation != null) {
+                    val latitude = lastKnownLocation.latitude
+                    val longitude = lastKnownLocation.longitude
+
+                    // Send SOS message with coordinates
+                    val message = "SOS! I am at: $latitude, $longitude"
+                    // Construct a map link using Google Maps URL
+                    val mapLink = "https://www.google.com/maps/@" + latitude + "," + longitude + ",15z"
+                    val destination = "SOS Number Location" // Replace with actual destination address or coordinates
+                    val origin = "$latitude,$longitude"
+
+// Use Google Maps Directions API to generate a URL
+                    val directionsUrl = "SOS! I am at:  https://www.google.com/maps/dir/?api=1&origin=$origin&destination=$destination"
+
+// Send the map link as an SMS message
+                    val smsManager = SmsManager.getDefault()
+                    smsManager.sendTextMessage(sosNumber, null, directionsUrl, null, null)
+                } else {
+                    // Handle case where location is not available
+                    Toast.makeText(this, "Unable to get current location", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            } else if (!sosEnabled) {
+                // Show dialog to enter name and number
+                val dialog = Dialog(this)
+                dialog.setContentView(R.layout.sos_dialog) // Replace with your dialog layout
+
+                val nameEditText = dialog.findViewById<EditText>(R.id.sos_nameEditText)
+                val numberEditText = dialog.findViewById<EditText>(R.id.sos_numberEditText)
+                val saveButton = dialog.findViewById<Button>(R.id.sos_saveButton)
+
+                saveButton.setOnClickListener {
+                    val name = nameEditText.text.toString()
+                    val number = numberEditText.text.toString()
+
+                    // Save name and number to SharedPreferences
+                    val editor = prefs.edit()
+                    editor.putString("sosName", name)
+                    editor.putString("sosNumber", number)
+                    editor.putBoolean("sos", true)
+                    editor.apply()
+
+                    dialog.dismiss()
+                    // Perform SOS action here (e.g., send message, make call)
+
+
+                }
+                dialog.show()
+            }
+        }
         checkNotificationPermissions()
         //    setSupportActionBar(toolbarmain)
         //  toolbarmain.setNavigationIcon(R.drawable.logo)
@@ -193,7 +288,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
 
     private fun checkNotificationPermissions() {
-         val requestPermissionLauncher = registerForActivityResult(
+        val requestPermissionLauncher = registerForActivityResult(
             ActivityResultContracts.RequestPermission(),
         ) { isGranted: Boolean ->
             if (isGranted) {
