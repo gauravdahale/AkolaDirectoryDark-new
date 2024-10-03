@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -49,7 +50,7 @@ class NewRegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         title = "Business Registration Form"
-
+        Toast.makeText(this@NewRegisterActivity, "Register New Activity", Toast.LENGTH_SHORT).show()
         val mSettings = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
         storedPhone = mSettings.getString("USER_NUMBER", "") ?: ""
         storedName = mSettings.getString("USER_NAME", "") ?: ""
@@ -164,6 +165,7 @@ class NewRegisterActivity : AppCompatActivity() {
 
         if (ImagePicker.shouldHandleResult(requestCode, resultCode, data)) {
             val images: ArrayList<Image> = ImagePicker.getImages(data)
+            Log.d(TAG, "onActivityResult: ${images}")
             images.forEach { image ->
                 Glide.with(this).load(image.uri).into(binding.registerUpload)
                 imagelist.add(image.uri)
@@ -212,7 +214,8 @@ fun pickImage() {
 
                         // check if all permissions are granted
                         if (report!!.areAllPermissionsGranted()) {
-                            //       Toast.makeText(applicationContext, "All permissions are granted!", Toast.LENGTH_SHORT).show();
+
+                                   Toast.makeText(applicationContext, "All permissions are granted!", Toast.LENGTH_SHORT).show();
                             pickImage()
                         }
 

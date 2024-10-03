@@ -23,7 +23,7 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/_12sdp"
                 android:fontFamily="@font/cabin"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/copper_text_color"/>
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

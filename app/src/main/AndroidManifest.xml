@@ -2,10 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+        tools:ignore="CoarseFineLocation" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".App"
@@ -20,31 +26,31 @@
 
         <activity android:name=".activity.DatabaseTest" />
         <activity android:name=".activity.OfferDetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity android:name=".activity.DrawerActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity android:name=".activity.ContactUsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity android:name=".activity.ShopListActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity android:name=".activity.OffersActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity android:name=".activity.UrlActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity android:name=".activity.PromoActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity android:name=".activity.EmergencyActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity android:name=".activity.RecordActivity"
             android:screenOrientation="fullSensor" />
         <activity android:name=".activity.RecordListActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity android:name=".activity.NewRegisterActivity" />
         <activity android:name=".activity.SplashScreen"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,7 +58,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.NotificationActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity android:name=".activity.NewsActivity" />
         <activity android:name=".activity.NewsReadActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -64,7 +70,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize|navigation|screenLayout"
             android:label="@string/app_name"
             android:resizeableActivity="true"
-            android:screenOrientation="userPortrait"
+            android:screenOrientation="fullSensor"
             android:windowSoftInputMode="adjustResize|adjustNothing|adjustUnspecified" />
         <activity android:name=".activity.PhoneAuth"
             android:theme="@style/AppTheme.Auth" />

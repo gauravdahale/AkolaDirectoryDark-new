@@ -1,5 +1,6 @@
 package gauravdahale.gtech.akoladirectory.activity
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -74,6 +75,7 @@ class RecordActivity : AppCompatActivity(), BaseSliderView.OnSliderClickListener
     lateinit var model: ContactModel
     private lateinit var binding: RecordActivityDarkBinding
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -111,9 +113,14 @@ class RecordActivity : AppCompatActivity(), BaseSliderView.OnSliderClickListener
         binding.callbtnrecord.setOnClickListener { handleCall() }
         binding.recordtiming.text = model.t
         binding.counter.text = model.c
-        binding.ratingBar.rating = model.rating!!.toFloat()
+    model.rating?.let {     binding.ratingBar.rating = it.toFloat()}
         binding.ownertxtview.text = model.o
-        binding.rating.text = "${model.rating}/${model.totalreviews} user reviews"
+ if(model.rating !=null && model.totalreviews!=null) {
+     binding.rating.text = "${model.rating}/${model.totalreviews} reviews"
+ }else{
+     binding.rating.text = "0  reviews"
+
+ }
 
         // Description handling
         model.d?.let {

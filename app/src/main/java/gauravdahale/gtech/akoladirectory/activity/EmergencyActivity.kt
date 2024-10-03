@@ -1,14 +1,10 @@
 package gauravdahale.gtech.akoladirectory.activity
 
 import android.content.Context
-import android.graphics.PorterDuff
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -21,7 +17,6 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.FirebaseDatabase
 
-import gauravdahale.gtech.akoladirectory.ItemClickListener
 import gauravdahale.gtech.akoladirectory.models.ContactModel
 import gauravdahale.gtech.akoladirectory.R
 
@@ -42,18 +37,20 @@ class EmergencyActivity : AppCompatActivity() {
         binding = ActivityEmergencyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupToolbar()
+        val title = intent.getStringExtra("Title") ?: ""
+        setupToolbar(title)
         initializeAnalytics()
         setupRecyclerView()
 
-        val title = intent.getStringExtra("Title") ?: ""
         val place = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE).getString("PLACE", "")
         loadEmergencyData(place, title)
     }
 
-    private fun setupToolbar() {
+    private fun setupToolbar(title: String) {
 //        val toolbar: MaterialToolbar = binding.emertoolbar
-        val toolbar: MaterialToolbar = findViewById(R.id.emertoolbar)
+        val toolbar: MaterialToolbar = binding.emertoolbar
+        val toolbarHeading  = binding.emeregnecytitle
+        toolbarHeading.text = title
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }

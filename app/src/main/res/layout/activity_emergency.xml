@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/emertoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/synthcolor"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/emeregnecytitle"
+            android:textStyle="bold"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/cabin"
+            android:textColor="@color/colorPrimaryDark"/>
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/emergency_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/emertoolbar"
         android:layoutAnimation="@anim/layout_animation_falling_down"/>
+
     <RelativeLayout
         android:id="@+id/eemptylistview"
         android:layout_width="wrap_content"
@@ -15,7 +34,6 @@
         android:layout_centerInParent="true">
 
         <ProgressBar
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
