@@ -7,6 +7,7 @@ class UserModel {
     var userName: String? = null
     var userOccupation: String? = null
     var userNumber: String? = null
+    var id: String? = null
     var userCity: String? = null
     var token: String? = null
     var date: String? = null

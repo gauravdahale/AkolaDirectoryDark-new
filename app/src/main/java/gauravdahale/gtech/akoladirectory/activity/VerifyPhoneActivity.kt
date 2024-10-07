@@ -208,8 +208,9 @@ class VerifyPhoneActivity : AppCompatActivity() {
         user.userCity = newuserCity
         user.date = newdatetime
         user.token = newtoken
+        user.id  = mAuth!!.currentUser!!.uid
 
-        mDatabaseReference!!.child("users").push().setValue(user)
+        mDatabaseReference!!.child("users").child(mAuth!!.currentUser!!.uid).setValue(user)
         mDatabaseReference!!.child("USERS").child(mAuth!!.currentUser!!.uid).setValue(user)
         val mAnalytics = FirebaseAnalytics.getInstance(this)
         val bundle = Bundle()

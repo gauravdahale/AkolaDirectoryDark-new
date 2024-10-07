@@ -26,6 +26,9 @@
     <string name="reference">reference</string>
     <string name="hashtag">#akoladirectory</string>
     <string name="facebookappmessage">Please share buldhana directory app link on Play Store and support us!!!</string>
+    <string name="business_registration_form">"Register "</string>
+    <string name="uploading_please_wait">Uploading please wait...</string>
+    <string name="please_wait">Please Wait..</string>
     <!--    <string name="recordlistbanner">ca-app-pub-4353073709762339/7293683279</string>-->
     <!--    <string name="registerbanner">ca-app-pub-4353073709762339/1841747863</string>-->
     <!--    <string name="registerinterstitial">ca-app-pub-4353073709762339/3885117964</string>-->

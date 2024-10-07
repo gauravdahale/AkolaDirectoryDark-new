@@ -2,7 +2,6 @@ package gauravdahale.gtech.akoladirectory.models
 
 import com.google.firebase.database.IgnoreExtraProperties
 import java.io.Serializable
-
 @IgnoreExtraProperties
 class ContactModel : Serializable {
     var d: String? = null
@@ -25,7 +24,10 @@ class ContactModel : Serializable {
     var totalreviews: String? = null
     var datetime: String? = null
     var uuid: String? = null
-    var images: HashMap<String?, String?>? = null
+    var images: HashMap<String?, String?> = HashMap()  // Initialize the HashMap
 
-
+    // Method to add images
+    fun addImage(key: String, url: String) {
+        images[key] = url
+    }
 }

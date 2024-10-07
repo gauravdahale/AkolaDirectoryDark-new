@@ -1,40 +1,29 @@
 package gauravdahale.gtech.akoladirectory.activity
 
-import android.Manifest
 import android.app.ProgressDialog
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import com.karumi.dexter.listener.single.PermissionListener
-import com.nguyenhoanglam.imagepicker.model.Config
-import com.nguyenhoanglam.imagepicker.model.Image
-import com.nguyenhoanglam.imagepicker.ui.imagepicker.ImagePicker
 import gauravdahale.gtech.akoladirectory.databinding.ActivityRegisterBinding
 import gauravdahale.gtech.akoladirectory.models.ContactModel
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.HashMap
+import kotlin.math.log
 
 class NewRegisterActivity : AppCompatActivity() {
-    private val TAG = "RegisterActivity"
+    private val TAG = "NewRegisterActivity"
     private lateinit var binding: ActivityRegisterBinding
     private val mStorage = FirebaseStorage.getInstance().getReference("requests")
     private val mReference = FirebaseDatabase.getInstance().getReference("NewRequests")
@@ -44,20 +33,38 @@ class NewRegisterActivity : AppCompatActivity() {
     private lateinit var storedName: String
     private val imagelist = ArrayList<Uri>()
 
+    // Launcher for the Image Picker
+    private lateinit var pickImagesLauncher: ActivityResultLauncher<String>
+    private lateinit var dialog: ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        dialog = ProgressDialog(this)
+        dialog.setMessage("Uploading images...")
+        dialog.setCancelable(false) // Prevent the dialog from being dismissed by tapping outside
 
         title = "Business Registration Form"
-        Toast.makeText(this@NewRegisterActivity, "Register New Activity", Toast.LENGTH_SHORT).show()
         val mSettings = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
         storedPhone = mSettings.getString("USER_NUMBER", "") ?: ""
         storedName = mSettings.getString("USER_NAME", "") ?: ""
-
         datetime = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(Date())
 
-        binding.registerUpload.setOnClickListener { requestPermissions() }
+        // Initialize image picker launcher using scoped storage
+        pickImagesLauncher =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+                uri?.let {
+                    if (imagelist.size < 4) { // Limit to a maximum of 4 images
+                        imagelist.add(it)
+                        Glide.with(this).load(it).into(binding.registerUpload)
+                        binding.registerImageText.text = "Images selected: ${imagelist.size}/4"
+                    } else {
+                        showToast("You can only select up to 4 images.")
+                    }
+                }
+            }
+
+        binding.registerUpload.setOnClickListener { pickImageFromGallery() }
         binding.registerSubmit.setOnClickListener { onSubmit() }
     }
 
@@ -99,14 +106,13 @@ class NewRegisterActivity : AppCompatActivity() {
         Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
+    // Picks image from the gallery using scoped storage
+    private fun pickImageFromGallery() {
+        pickImagesLauncher.launch("image/*")
+    }
+
     private fun uploadImages(images: List<Uri>) {
-        val dialog = ProgressDialog(this).apply {
-            setMessage("Uploading Please Wait")
-            setTitle("Please Wait...")
-            setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
-            setCancelable(false)
-            show()
-        }
+        dialog.show()  // Show the progress dialog
 
         val model = ContactModel().apply {
             n = binding.registerName.editText?.text.toString()
@@ -118,38 +124,43 @@ class NewRegisterActivity : AppCompatActivity() {
             datetime = this@NewRegisterActivity.datetime
             d = binding.registerDescription.editText?.text.toString()
             uuid = currentUser
-        }
 
+        }
+        model.images = HashMap()  // Initialize the HashMap
         if (images.isNotEmpty()) {
             images.forEachIndexed { index, uri ->
-                val imageRef = mStorage.child("${model.n}/${uri.lastPathSegment}.jpg")
+                val imageRef = mStorage.child("RequestImages/${uri.lastPathSegment}.jpg")
                 imageRef.putFile(uri)
                     .addOnProgressListener { taskSnapshot ->
-                        val progress = (100 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount).toInt()
-                        dialog.setMessage("Upload image $index of ${images.size}")
-                        dialog.progress = progress
+                        val progress =
+                            (100 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount).toInt()
+                        dialog.setMessage("Uploading image ${index + 1} of ${images.size}: $progress%")
                     }
                     .addOnSuccessListener {
                         imageRef.downloadUrl.addOnSuccessListener { downloadUri ->
-                            model.images?.set("image$index", downloadUri.toString())
+                            model.addImage(
+                                "image$index",
+                                downloadUri.toString()
+                            ) // Add the image URL to the model
                             if (index == images.lastIndex) {
                                 saveToDatabase(model)
-                                dialog.dismiss()
+                                dialog.dismiss()  // Dismiss dialog after last upload
                             }
                         }
                     }
                     .addOnFailureListener { e ->
                         showToast("File uploading failed: ${e.message}")
-                        dialog.dismiss()
+                        dialog.dismiss()  // Dismiss dialog on failure
                     }
             }
         } else {
             saveToDatabase(model)
-            dialog.dismiss()
+            dialog.dismiss()  // Dismiss dialog if no images to upload
         }
     }
 
     private fun saveToDatabase(model: ContactModel) {
+        Log.d(TAG, "saveToDatabase: ${model.toString()}")
         mReference.child(currentUser!!).setValue(model)
             .addOnSuccessListener {
                 showToast("Your details have been accepted, we will contact you shortly.")
@@ -158,127 +169,5 @@ class NewRegisterActivity : AppCompatActivity() {
             .addOnFailureListener { e ->
                 showToast("Failed to save data: ${e.message}")
             }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (ImagePicker.shouldHandleResult(requestCode, resultCode, data)) {
-            val images: ArrayList<Image> = ImagePicker.getImages(data)
-            Log.d(TAG, "onActivityResult: ${images}")
-            images.forEach { image ->
-                Glide.with(this).load(image.uri).into(binding.registerUpload)
-                imagelist.add(image.uri)
-            }
-            binding.registerImageText.text = "Image selected: ${imagelist.size}"
-        }
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
-
-
-fun pickImage() {
-        //   requestCameraPermission()
-
-        //   requestStoragePermission()
-        imagelist.clear()
-        ImagePicker.with(this)
-                .setFolderMode(true)
-                .setFolderTitle("Album")
-                .setRootDirectoryName(Config.ROOT_DIR_DCIM)
-                .setDirectoryName("Image Picker")
-                .setMultipleMode(true)
-                .setShowNumberIndicator(true)
-                .setMaxSize(2)
-                .setLimitMessage("You can select up to 10 images")
-//                .setSelectedImages()
-                .setRequestCode(200)
-                .start();
-    }
-
-    companion object {
-        //   var imagelist :ArrayList<PostModel> =ArrayList<PostModel>()
-        internal val imagelist: ArrayList<Uri> = ArrayList()
-    }
-
-    private fun requestPermissions() {
-        Dexter.withActivity(this)
-                .withPermissions(
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .withListener(object : MultiplePermissionsListener {
-                    override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-
-                        // check if all permissions are granted
-                        if (report!!.areAllPermissionsGranted()) {
-
-                                   Toast.makeText(applicationContext, "All permissions are granted!", Toast.LENGTH_SHORT).show();
-                            pickImage()
-                        }
-
-                        // check for permanent denial of any permission
-                        if (report!!.isAnyPermissionPermanentlyDenied) {
-                            // show alert dialog navigating to Settings
-                            showSettingsDialog();
-                        }
-                    }
-
-                    override fun onPermissionRationaleShouldBeShown(permissions: MutableList<PermissionRequest>?, token: PermissionToken) {
-                        token.continuePermissionRequest();
-                    }
-                }).withErrorListener { Toast.makeText(getApplicationContext(), "Error occurred! ", Toast.LENGTH_SHORT).show(); }
-                .onSameThread()
-                .check()
-    }
-
-    private fun requestCameraPermission() {
-        Dexter.withActivity(this)
-                .withPermission(Manifest.permission.CAMERA)
-                .withListener(object : PermissionListener {
-                    override fun onPermissionGranted(response: PermissionGrantedResponse) {
-                        // permission is granted
-//                        openCamera();
-                    }
-
-                    override fun onPermissionDenied(response: PermissionDeniedResponse) {
-                        // check for permanent denial of permission
-                        if (response.isPermanentlyDenied) {
-                            showSettingsDialog()
-                        }
-                    }
-
-                    override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest, token: PermissionToken) {
-                        token.continuePermissionRequest();
-                    }
-                }).check();
-    }
-
-    private fun showSettingsDialog() {
-        val builder = AlertDialog.Builder(this);
-        builder.setTitle("Need Permissions");
-        builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
-        builder.setPositiveButton("GOTO SETTINGS") { dialog, which ->
-            dialog.cancel();
-            openSettings();
-        }
-        builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel(); };
-        builder.show();
-
-    }
-
-    // navigating user to app settings
-    private fun openSettings() {
-        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        val uri = Uri.fromParts("package", packageName, null);
-        intent.data = uri;
-        startActivityForResult(intent, 101);
-    }
-
-    private fun openCamera() {
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, 100);
     }
 }
