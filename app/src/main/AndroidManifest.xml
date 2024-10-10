@@ -23,6 +23,15 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <provider android:authorities="com.facebook.app.FacebookContentProvider1234"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true" />
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+        ...
+
 
         <activity android:name=".activity.DatabaseTest" />
         <activity android:name=".activity.OfferDetailActivity"
@@ -80,8 +89,7 @@
             android:resource="@string/asset_statements" />
         <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT"
             android:value="DISABLE" />
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_application_id" />
+
         <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/akolalogo" />
         <meta-data android:name="preloaded_fonts"

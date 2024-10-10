@@ -1,5 +1,8 @@
 package gauravdahale.gtech.akoladirectory.activity
 
+//import com.google.firebase.Firebase
+//import com.google.firebase.appcheck.appCheck
+//import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
@@ -8,10 +11,12 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.content.pm.PackageManager.NameNotFoundException
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.util.Base64
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -46,20 +51,20 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
-//import com.google.firebase.Firebase
-//import com.google.firebase.appcheck.appCheck
-//import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 import gauravdahale.gtech.akoladirectory.ChangeFragment
-import gauravdahale.gtech.akoladirectory.models.ContactModel
-import gauravdahale.gtech.akoladirectory.fragments.*
-import gauravdahale.gtech.akoladirectory.models.UserModel
 import gauravdahale.gtech.akoladirectory.R
 import gauravdahale.gtech.akoladirectory.adapter.PlaceAdapter
+import gauravdahale.gtech.akoladirectory.fragments.*
+import gauravdahale.gtech.akoladirectory.models.ContactModel
+import gauravdahale.gtech.akoladirectory.models.UserModel
 import kotlinx.coroutines.*
 import java.lang.Runnable
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
 
@@ -70,6 +75,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             val fragment = HomeServicesFragment()
             doFragmentTransaction(fragment, fragmentTag, true, message)
         }
+        checkFBHash()
         /*  if (fragmentTag == "Record" ){
               val fragment = RecordFragment()
               doFragmentTransaction(fragment, fragmentTag, true, bundle!!)
@@ -83,6 +89,22 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             doFragmentTransaction(fragment, fragmentTag, true, message)
         }*/
 
+    }
+
+    private fun checkFBHash() {
+        try {
+            val info = packageManager.getPackageInfo(
+                "com.facebook.samples.hellofacebook",
+                PackageManager.GET_SIGNATURES
+            )
+            for (signature in info.signatures) {
+                val md = MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT))
+            }
+        } catch (e: NameNotFoundException) {
+        } catch (e: NoSuchAlgorithmException) {
+        }
     }
 
     private var mHandler: Handler? = null

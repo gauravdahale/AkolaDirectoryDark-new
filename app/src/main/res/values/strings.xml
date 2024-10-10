@@ -40,6 +40,8 @@
     <!--    <string name="admob_id">ca-app-pub-4353073709762339~9362988006</string>-->
     <!--    <string name="facebook_application_id">377617299334175</string>-->
     <!--    <string name="facebook_provider_id">com.facebook.app.FacebookContentProvider377617299334175</string>-->
+    <string name="facebook_app_id">810342511049430</string>
+    <string name="facebook_client_token">246603c05daf24b67bd48646fd8c7022</string>
 
 
     <string-array name="Places">

@@ -13,5 +13,6 @@
     <string name="registerinterstitial">ca-app-pub-4353073709762339/3885117964</string>
     <string name="facebooksharelink" >https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fakoladirectory%2Fposts%2F902835803398233</string>
     <string name="facebookappmessage">आपल्या अकोल्याची आपली अँप</string>
+    <string name="facebook_app_id">810342511049430</string>
 
 </resources>
