@@ -2,55 +2,52 @@ package gauravdahale.gtech.akoladirectory.activity
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.view.animation.ScaleAnimation
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.Observer
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.facebook.appevents.codeless.internal.ViewHierarchy.setOnClickListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.database.*
+import com.google.firebase.database.FirebaseDatabase
 import gauravdahale.gtech.akoladirectory.R
 import gauravdahale.gtech.akoladirectory.adapter.ShopListAdapter
 import gauravdahale.gtech.akoladirectory.databinding.CattoolbarBinding
-import gauravdahale.gtech.akoladirectory.livedata.ShopListLiveData
 import gauravdahale.gtech.akoladirectory.models.CallModel
-import gauravdahale.gtech.akoladirectory.models.ContactModel
 import gauravdahale.gtech.akoladirectory.viewmodels.ShopListViewModel
 import gauravdahale.gtech.akoladirectory.viewmodels.ShopListViewModelFactory
 
 class ShopListActivity : AppCompatActivity() {
 
+    // View Binding
     private lateinit var binding: CattoolbarBinding
-    private lateinit var mAnalytics: FirebaseAnalytics
-    private lateinit var adapter: ShopListAdapter
-    private lateinit var viewModel: ShopListViewModel
-    private lateinit var mRef: DatabaseReference
-    private lateinit var linearLayoutManager: LinearLayoutManager
-    private var lastPosition = -1
 
-    private var fab: FloatingActionButton? = null
-    private var tvNoMovies: ProgressBar? = null
-    private val datalist = ArrayList<ContactModel>()
+    // Firebase
+    private lateinit var mAnalytics: FirebaseAnalytics
+
+    // RecyclerView and Adapter
+    private lateinit var adapter: ShopListAdapter
+
+    // ViewModel
+    private lateinit var viewModel: ShopListViewModel
+
+    // UI elements
+    private lateinit var fab: FloatingActionButton
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = CattoolbarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -61,30 +58,34 @@ class ShopListActivity : AppCompatActivity() {
         observeLiveData()
     }
 
+    // Toolbar setup
     private fun setupToolbar() {
-        val toolbar = binding.toolbarnew
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbarnew)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.toolbarnew.navigationIcon?.setColorFilter(
+            resources.getColor(R.color.colorPrimaryDark),
+            PorterDuff.Mode.SRC_ATOP
+        )
 
-        val title = intent.getStringExtra("Title") ?: ""
         val titlebar = intent.getStringExtra("Settitle") ?: ""
         val prefs = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
         val place = prefs.getString("PLACE", "") ?: ""
 
-        toolbar.findViewById<TextView>(R.id.catoolbartext).text = titlebar
-        toolbar.findViewById<TextView>(R.id.placeselected).text = "($place)"
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.navigationIcon?.setColorFilter(resources.getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP)
+        binding.catoolbartext.text = titlebar
+        binding.placeselected.text = "($place)"
     }
 
+    // Firebase Analytics setup
     private fun initializeAnalytics() {
         mAnalytics = FirebaseAnalytics.getInstance(this)
         val prefs = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
-        val storedName = prefs.getString("USER_NAME", "")
-        val storedPhone = prefs.getString("USER_NUMBER", "")
-        val city = prefs.getString("PLACE", "")
+        val storedName = prefs.getString("USER_NAME", "") ?: ""
+        val storedPhone = prefs.getString("USER_NUMBER", "") ?: ""
+        val city = prefs.getString("PLACE", "") ?: ""
+        val category = intent.getStringExtra("Title") ?: ""
 
         val bundle = Bundle().apply {
-            putString("Category", intent.getStringExtra("Title"))
+            putString("Category", category)
             putString(FirebaseAnalytics.Param.CHARACTER, storedName)
             putString(FirebaseAnalytics.Param.ACHIEVEMENT_ID, storedPhone)
             putString("City", city)
@@ -93,49 +94,62 @@ class ShopListActivity : AppCompatActivity() {
         mAnalytics.logEvent("CategoryVisited", bundle)
     }
 
+    // RecyclerView setup
     private fun setupRecyclerView() {
         val emptyView = findViewById<ImageView>(R.id.emptyimage)
-        tvNoMovies = findViewById<ProgressBar>(R.id.emptylistview)
+        progressBar = binding.contentSub.emptylistview
         val recyclerView = findViewById<RecyclerView>(R.id.itemlist_recyclerview)
 
-        linearLayoutManager = LinearLayoutManager(this)
-        adapter = ShopListAdapter(this, datalist)
+        adapter = ShopListAdapter(this)
 
-        recyclerView.layoutManager = linearLayoutManager
+        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
-        recyclerView.layoutAnimation = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_slide_from_right)
+        recyclerView.layoutAnimation = AnimationUtils.loadLayoutAnimation(
+            this,
+            R.anim.layout_animation_slide_from_right
+        )
 
-        emptyView.visibility = View.GONE
-        tvNoMovies?.visibility = View.GONE
+        emptyView.isVisible = false
+        progressBar.isVisible = false
     }
 
+    // Floating Action Button setup
     private fun setupFloatingActionButton() {
-        fab = findViewById<FloatingActionButton>(R.id.fab).apply {
-            setOnClickListener {
-                startActivity(Intent(this@ShopListActivity, NewRegisterActivity::class.java))
-            }
-
-            startAnimation(ScaleAnimation(1.15f, 0.0f, 1.15f, 0.0f, 1, 0.5f, 1, 0.5f))
+        fab = findViewById(R.id.fab)
+        fab.setOnClickListener {
+            startActivity(Intent(this, NewRegisterActivity::class.java))
         }
 
-        findViewById<RecyclerView>(R.id.itemlist_recyclerview).addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (dy > 0) fab?.hide() else fab?.show()
-            }
-        })
+//        fab.startAnimation(
+////            AnimationUtils.loadAnimation(this, R.anim.fab_scale_animation)
+//        )
+
+        findViewById<RecyclerView>(R.id.itemlist_recyclerview)
+            .addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    if (dy > 0) fab.hide() else fab.show()
+                }
+            })
     }
 
+    // LiveData observation
     private fun observeLiveData() {
-        val place = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE).getString("PLACE", "") ?: ""
-        viewModel = ViewModelProvider(this, ShopListViewModelFactory("$place/${intent.getStringExtra("Title")}", place)).get(ShopListViewModel::class.java)
+        val place = getSharedPreferences("USER_INFO", Context.MODE_PRIVATE)
+            .getString("PLACE", "") ?: ""
+        val category = intent.getStringExtra("Title") ?: ""
+        viewModel = ViewModelProvider(
+            this,
+            ShopListViewModelFactory("$place/$category", place)
+        )[ShopListViewModel::class.java]
 
-        viewModel.getDataSnapshotLiveData().observe(this, Observer {
+        viewModel.getDataSnapshotLiveData().observe(this) {
+
             adapter.submitList(it)
-            tvNoMovies?.visibility = View.GONE
-        })
+            progressBar.isVisible = false
+        }
     }
 
+    // Handle Up button click
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == android.R.id.home) {
             onBackPressed()
@@ -145,15 +159,22 @@ class ShopListActivity : AppCompatActivity() {
         }
     }
 
-    fun logcall(shopTitle: String, userName: String?, userPhone: String?, callDate: String) {
+    // Log call details to Firebase
+    fun logcall(
+        shopTitle: String,
+        userName: String?,
+        userPhone: String?,
+        callDate: String
+    ) {
         val call = CallModel(shopTitle, userName, userPhone, callDate)
-        FirebaseDatabase.getInstance().reference.child("CallLog").child(shopTitle).push().setValue(call)
+        FirebaseDatabase.getInstance().reference.child("CallLog").child(shopTitle)
+            .push().setValue(call)
     }
 
+    // Show call dialog
     fun calldialog(phone1: String, phone2: String) {
         val dialogBuilder = AlertDialog.Builder(this)
-        val inflater = layoutInflater
-        val alertLayout = inflater.inflate(R.layout.custom_call_dialog, null)
+        val alertLayout = layoutInflater.inflate(R.layout.custom_call_dialog, null)
 
         dialogBuilder.setView(alertLayout)
         alertLayout.findViewById<TextView>(R.id.numberone).apply {
@@ -168,25 +189,12 @@ class ShopListActivity : AppCompatActivity() {
         dialogBuilder.create().show()
     }
 
+    // Dial a phone number
     private fun dialNumber(phone: String) {
         val intent = Intent(Intent.ACTION_DIAL).apply {
             data = Uri.parse("tel:$phone")
         }
         startActivity(intent)
-    }
-
-    private fun runLayoutAnimation(recyclerView: RecyclerView) {
-        recyclerView.layoutAnimation = AnimationUtils.loadLayoutAnimation(recyclerView.context, R.anim.layout_animation_slide_from_right)
-        recyclerView.adapter!!.notifyDataSetChanged()
-        recyclerView.scheduleLayoutAnimation()
-    }
-
-    override fun onStart() {
-        super.onStart()
-    }
-
-    override fun onStop() {
-        super.onStop()
     }
 
     companion object {

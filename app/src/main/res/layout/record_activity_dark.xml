@@ -382,7 +382,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
 
                     <ImageView
                         android:id="@+id/imageView4"
@@ -407,7 +408,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
                             android:fontFamily="@font/cabin"
-                            android:text="Phone"
+                            android:text="@string/phone"
                             android:textColor="@color/copper_text_color"
                             android:textSize="12sp"
                             app:layout_constraintStart_toEndOf="@+id/imageView4"
@@ -462,7 +463,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
                             android:fontFamily="@font/cabin"
-                            android:text="Services"
+                            android:text="@string/services"
                             android:textColor="@color/copper_text_color"
                             android:textSize="12sp" />
 
@@ -474,7 +475,7 @@
                             android:layout_marginEnd="8dp"
                             android:autoLink="all"
                             android:fontFamily="@font/cabin"
-                            android:text="Not Available"
+                            android:text="@string/not_available"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
@@ -522,7 +523,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
                             android:fontFamily="@font/cabin"
-                            android:text="Timing"
+                            android:text="@string/timing"
                             android:textColor="@color/copper_text_color"
                             android:textSize="12sp"
                             app:layout_constraintStart_toEndOf="@+id/imageView9"

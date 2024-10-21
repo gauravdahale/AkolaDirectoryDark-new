@@ -295,7 +295,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         val textSliderView = DefaultSliderView(applicationContext)
                         // initialize a SliderLayout
                         textSliderView
-                            .image(post!!.i).empty(R.drawable.akolanotice)
+                            .image(post!!.i).empty(R.drawable.notice3)
 
                             .setOnSliderClickListener {
                                 //Toast.makeText(getApplicationContext(), "clicked image= "+post.getN(), Toast.LENGTH_SHORT).show();

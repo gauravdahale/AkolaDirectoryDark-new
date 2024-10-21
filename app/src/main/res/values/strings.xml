@@ -42,6 +42,13 @@
     <!--    <string name="facebook_provider_id">com.facebook.app.FacebookContentProvider377617299334175</string>-->
     <string name="facebook_app_id">810342511049430</string>
     <string name="facebook_client_token">246603c05daf24b67bd48646fd8c7022</string>
+    <string name="categoryname">CategoryName</string>
+    <string name="categoryimage">categoryImage</string>
+    <string name="phone">Phone</string>
+    <string name="services">Services</string>
+    <string name="not_available">Not Available</string>
+    <string name="timing">Timing</string>
+    <string name="Call">Call</string>
 
 
     <string-array name="Places">
