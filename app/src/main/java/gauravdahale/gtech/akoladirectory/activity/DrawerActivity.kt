@@ -490,6 +490,14 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 loadfragment(ContactUS(), "Contact Us")
             }
 
+            R.id.nav_advertisement_packages -> {
+                startActivity(Intent(DrawerActivity@ this, PackagesActivity::class.java))
+            }
+
+            R.id.nav_my_purchases -> {
+                startActivity(Intent(DrawerActivity@ this, TransactionHistoryActivity::class.java))
+            }
+
             R.id.nav_register -> {
                 startActivity(Intent(DrawerActivity@ this, NewRegisterActivity::class.java))
             }

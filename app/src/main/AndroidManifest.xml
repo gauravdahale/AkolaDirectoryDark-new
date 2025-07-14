@@ -76,6 +76,14 @@
             android:theme="@style/AppTheme.Auth" />
         <activity android:name=".activity.VerifyPhoneActivity" />
 
+        <!-- Pricing System Activities -->
+        <activity android:name=".activity.PackagesActivity"
+            android:screenOrientation="fullSensor" />
+        <activity android:name=".activity.PaymentActivity"
+            android:screenOrientation="fullSensor" />
+        <activity android:name=".activity.TransactionHistoryActivity"
+            android:screenOrientation="fullSensor" />
+
         <meta-data android:name="asset_statements"
             android:resource="@string/asset_statements" />
         <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT"

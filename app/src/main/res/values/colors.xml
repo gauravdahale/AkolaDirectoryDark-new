@@ -330,6 +330,14 @@
     <color name="home_title_colot">#6E1DD1</color>
     <color name="white">#FFFFFFFF</color>
 
+    <!-- Colors for pricing system -->
+    <color name="backgroundColor">@color/grey_50</color>
+    <color name="textColorPrimary">@color/grey_800</color>
+    <color name="textColorSecondary">@color/grey_600</color>
+    <color name="packageCardBasic">@color/white</color>
+    <color name="packageCardPremium">@color/light_blue_50</color>
+    <color name="packageCardBusiness">@color/purple_50</color>
+    <color name="packageCardEnterprise">@color/amber_50</color>
 
     <!--for random color generator -->
     <array name="mdcolor_random">

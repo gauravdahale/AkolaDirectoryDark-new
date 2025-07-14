@@ -183,6 +183,13 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:24.0.1'
 //    implementation 'club.cred.android:synth:1.0.0'
 
+    // Stripe Payment SDK
+    implementation 'com.stripe:stripe-android:20.35.0'
+    
+    // Additional dependencies for pricing system
+    implementation 'androidx.work:work-runtime-ktx:2.9.0'
+    implementation 'androidx.fragment:fragment-ktx:1.6.2'
+
 
 }
 
