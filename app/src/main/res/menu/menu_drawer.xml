@@ -53,6 +53,14 @@
             android:id="@+id/nav_contactus"
             android:icon="@drawable/ic_chat_black_48dp"
             android:title="Contact Us" />
+        <item
+            android:id="@+id/nav_advertisement_packages"
+            android:icon="@drawable/ic_baseline_payment_24"
+            android:title="Advertisement Packages" />
+        <item
+            android:id="@+id/nav_my_purchases"
+            android:icon="@drawable/ic_baseline_receipt_24"
+            android:title="My Purchases" />
     </group>
 
     <item android:title="Communicate">
